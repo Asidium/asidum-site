@@ -1,1 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Asidum</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Asidum — product in development" />
+</head>
+<body>
+  <h1>Asidum</h1>
+  <p>Product in development.</p>
+  <p>Contact: <a href="mailto:info@asidum.com">info@asidum.com</a></p>
+</body>
+</html>
 # asidum-site
