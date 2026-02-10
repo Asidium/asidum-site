@@ -126,11 +126,11 @@ const svg = document.querySelector("svg");
 const boundary = document.getElementById("boundary");
 const inner = document.getElementById("inner");
 
-const CENTER = { x: 130, y: 130 };
-const BASE_RADIUS = 88;
+const CENTER = { x: 180, y: 180 };
+const BASE_RADIUS = 90;
 const POINTS = 48;
-const MAX_OFFSET = 52;
-const DEFORM_STRENGTH = 1.35;
+const MAX_OFFSET = 70;
+const DEFORM_STRENGTH = 1.6;
 
 let shape = Array.from({ length: POINTS }, (_, i) => {
   const a = (Math.PI * 2 * i) / POINTS;
@@ -188,7 +188,14 @@ function update() {
       influence = Math.exp(-da * da * 1.6) * vDist;
     }
 
-    const targetR = p.base + influence * BASE_RADIUS * DEFORM_STRENGTH;
+    const maxRadius = BASE_RADIUS + 60;
+const minRadius = BASE_RADIUS - 12;
+
+let targetR =
+  p.base + influence * BASE_RADIUS * DEFORM_STRENGTH;
+
+targetR = Math.max(minRadius, Math.min(maxRadius, targetR));
+
     p.current += (targetR - p.current) * 0.14;
   });
 
