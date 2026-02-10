@@ -4,77 +4,62 @@
 <meta charset="UTF-8">
 <title>Asidum</title>
 
-<meta name="description" content="Defining a system state. Positive change happens within.">
+<meta name="description" content=" Defining a system state. Positive change happens within.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
-  :root {
-    --bg: #141820;
-    --fg: #eef1f5;
-    --muted: #aab1bc;
-    --stroke: #cfd5df;
-    --accent: #8fb1ff;
-  }
-
   body {
     margin: 0;
     height: 100vh;
-    background: radial-gradient(circle at 50% 30%, #1b2130, var(--bg));
+    background: #0f1115;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--fg);
-    font-family: system-ui, -apple-system, BlinkMacSystemFont,
-                 "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: #e6e8eb;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+                 Roboto, Helvetica, Arial, sans-serif;
   }
 
   .wrap {
     text-align: center;
   }
 
-  .status {
-    font-size: 13px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 18px;
-  }
-
   svg {
-    width: 320px;
-    height: 320px;
-    margin-bottom: 32px;
+    width: 260px;
+    height: 260px;
+    margin-bottom: 28px;
   }
 
   h1 {
-    margin: 0 0 12px;
-    font-size: 44px;
+    margin: 0 0 10px;
+    font-size: 42px;
     font-weight: 600;
     letter-spacing: 0.06em;
   }
 
   .tagline {
-    font-size: 16px;
-    line-height: 1.7;
-    color: var(--muted);
-    margin-bottom: 22px;
+    font-size: 15px;
+    line-height: 1.6;
+    color: #9aa0a6;
+    max-width: 520px;
+    margin: 0 auto 18px;
   }
 
   .contact a {
-    color: var(--fg);
+    color: #e6e8eb;
     text-decoration: none;
-    border-bottom: 1px solid rgba(255,255,255,0.3);
+    border-bottom: 1px solid rgba(255,255,255,0.35);
   }
 
   .contact a:hover {
-    color: var(--accent);
-    border-color: var(--accent);
+    color: #7aa7ff;
+    border-color: #7aa7ff;
   }
 
   footer {
-    margin-top: 30px;
+    margin-top: 28px;
     font-size: 13px;
-    color: #7f8794;
+    color: #6b7280;
   }
 </style>
 </head>
@@ -82,25 +67,23 @@
 
 <div class="wrap">
 
-  <div class="status">Under development</div>
-
   <!-- INTERACTIVE LOGO -->
-  <svg viewBox="0 0 260 260">
+  <svg viewBox="0 0 200 200">
     <defs>
       <radialGradient id="innerGrad" cx="30%" cy="30%" r="70%">
-        <stop offset="0%" stop-color="#b8ccff"/>
-        <stop offset="100%" stop-color="#5a7de0"/>
+        <stop offset="0%" stop-color="#7aa7ff"/>
+        <stop offset="100%" stop-color="#2f5bd3"/>
       </radialGradient>
     </defs>
 
     <path id="boundary"
           fill="none"
-          stroke="var(--stroke)"
+          stroke="#e6e8eb"
           stroke-width="2"
-          opacity="0.9"/>
+          opacity="0.85"/>
 
     <circle id="inner"
-            r="11"
+            r="10"
             fill="url(#innerGrad)"/>
   </svg>
 
@@ -126,19 +109,19 @@ const svg = document.querySelector("svg");
 const boundary = document.getElementById("boundary");
 const inner = document.getElementById("inner");
 
-const CENTER = { x: 180, y: 180 };
-const BASE_RADIUS = 90;
-const POINTS = 48;
-const MAX_OFFSET = 70;
-const DEFORM_STRENGTH = 1.6;
+const CENTER = { x: 100, y: 100 };
+const BASE_RADIUS = 72;
+const POINTS = 40;
+const MAX_OFFSET = 34;
+const DEFORM_STRENGTH = 0.9;
 
 let shape = Array.from({ length: POINTS }, (_, i) => {
   const a = (Math.PI * 2 * i) / POINTS;
   return { angle: a, base: BASE_RADIUS, current: BASE_RADIUS };
 });
 
-let innerPos = { ...CENTER };
-let targetInner = { ...CENTER };
+let innerPos = { x: CENTER.x, y: CENTER.y };
+let targetInner = { ...innerPos };
 let mouseActive = false;
 
 svg.addEventListener("mousemove", e => {
@@ -167,6 +150,7 @@ svg.addEventListener("mouseleave", () => {
 });
 
 function update() {
+  // inner sphere follows cursor, but never snaps back
   innerPos.x += (targetInner.x - innerPos.x) * 0.08;
   innerPos.y += (targetInner.y - innerPos.y) * 0.08;
 
@@ -180,23 +164,17 @@ function update() {
 
   shape.forEach(p => {
     let influence = 0;
+
     if (mouseActive) {
       const da = Math.atan2(
         Math.sin(p.angle - vAngle),
         Math.cos(p.angle - vAngle)
       );
-      influence = Math.exp(-da * da * 1.6) * vDist;
+      influence = Math.exp(-da * da * 2.2) * vDist;
     }
 
-    const maxRadius = BASE_RADIUS + 60;
-const minRadius = BASE_RADIUS - 12;
-
-let targetR =
-  p.base + influence * BASE_RADIUS * DEFORM_STRENGTH;
-
-targetR = Math.max(minRadius, Math.min(maxRadius, targetR));
-
-    p.current += (targetR - p.current) * 0.14;
+    const targetRadius = p.base + influence * BASE_RADIUS * DEFORM_STRENGTH;
+    p.current += (targetRadius - p.current) * 0.15;
   });
 
   let d = "";
@@ -208,6 +186,7 @@ targetR = Math.max(minRadius, Math.min(maxRadius, targetR));
   d += "Z";
 
   boundary.setAttribute("d", d);
+
   requestAnimationFrame(update);
 }
 
