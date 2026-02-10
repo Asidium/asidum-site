@@ -1,104 +1,176 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Asidum</title>
+<meta charset="UTF-8">
+<title>Asidum</title>
 
-  <meta name="description" content="Asidum — product in development">
-  <meta name="robots" content="index, follow">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content=" Defining a system state where systems remain stable and positive change happens within.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <style>
-    :root {
-      --bg: #0f1115;
-      --fg: #e6e8eb;
-      --muted: #9aa0a6;
-      --accent: #4f8cff;
-    }
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    background: #0f1115;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #e6e8eb;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+                 Roboto, Helvetica, Arial, sans-serif;
+  }
 
-    * {
-      box-sizing: border-box;
-    }
+  .wrap {
+    text-align: center;
+  }
 
-    body {
-      margin: 0;
-      min-height: 100vh;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
-                   Roboto, Inter, Helvetica, Arial, sans-serif;
-      background: var(--bg);
-      color: var(--fg);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
+  svg {
+    width: 260px;
+    height: 260px;
+    margin-bottom: 28px;
+  }
 
-    .container {
-      max-width: 520px;
-      padding: 48px 32px;
-      text-align: center;
-    }
+  h1 {
+    margin: 0 0 12px;
+    font-size: 42px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+  }
 
-    h1 {
-      margin: 0 0 16px;
-      font-size: 48px;
-      font-weight: 600;
-      letter-spacing: 0.04em;
-    }
-
-    p {
-      margin: 0 0 24px;
-      font-size: 16px;
-      line-height: 1.6;
-      color: var(--muted);
-    }
-
-    .status {
-      display: inline-block;
-      margin-bottom: 32px;
-      padding: 6px 14px;
-      border-radius: 999px;
-      font-size: 13px;
-      color: var(--accent);
-      border: 1px solid rgba(79, 140, 255, 0.4);
-    }
-
-    a {
-      color: var(--fg);
-      text-decoration: none;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-      transition: border-color 0.2s, color 0.2s;
-    }
-
-    a:hover {
-      color: var(--accent);
-      border-color: var(--accent);
-    }
-
-    footer {
-      margin-top: 48px;
-      font-size: 13px;
-      color: #6b7280;
-    }
-  </style>
+  .tagline {
+    font-size: 15px;
+    line-height: 1.6;
+    color: #9aa0a6;
+    max-width: 520px;
+    margin: 0 auto;
+  }
+</style>
 </head>
 <body>
-  <main class="container">
-    <span class="status">Product in development</span>
 
-    <h1>Asidum</h1>
+<div class="wrap">
 
-    <p>
-      We are working on a new product.<br>
-      More details coming soon.
-    </p>
+  <!-- INTERACTIVE MARK -->
+  <svg viewBox="0 0 200 200">
+    <defs>
+      <radialGradient id="innerGrad" cx="30%" cy="30%" r="70%">
+        <stop offset="0%" stop-color="#7aa7ff"/>
+        <stop offset="100%" stop-color="#2f5bd3"/>
+      </radialGradient>
 
-    <p>
-      Contact: <a href="mailto:info@asidum.com">info@asidum.com</a>
-    </p>
+      <filter id="softShadow" x="-50%" y="-50%" width="200%" height="200%">
+        <feDropShadow dx="0" dy="6" stdDeviation="8"
+          flood-color="#000" flood-opacity="0.45"/>
+      </filter>
+    </defs>
 
-    <footer>
-      © 2026 Asidum
-    </footer>
-  </main>
+    <path id="boundary"
+          fill="none"
+          stroke="#e6e8eb"
+          stroke-width="2"
+          opacity="0.85"/>
+
+    <circle id="inner"
+            r="10"
+            fill="url(#innerGrad)"
+            filter="url(#softShadow)"/>
+  </svg>
+
+  <!-- BRAND -->
+  <h1>Asidum</h1>
+
+  <!-- TAGLINE -->
+  <div class="tagline">
+    Defining a system state.<br>
+    Positive change happens within.
+  </div>
+
+</div>
+
+<script>
+const svg = document.querySelector("svg");
+const boundary = document.getElementById("boundary");
+const inner = document.getElementById("inner");
+
+const CENTER = { x: 100, y: 100 };
+const BASE_RADIUS = 74;
+const POINTS = 32;
+const MAX_OFFSET = 26;
+const DEFORM_STRENGTH = 0.45;
+
+let shape = Array.from({ length: POINTS }, (_, i) => {
+  const a = (Math.PI * 2 * i) / POINTS;
+  return { angle: a, radius: BASE_RADIUS };
+});
+
+// rupture
+shape[5].radius += 10;
+shape[6].radius += 14;
+shape[7].radius += 8;
+
+let target = { ...CENTER };
+let current = { ...CENTER };
+
+svg.addEventListener("mousemove", e => {
+  const pt = svg.createSVGPoint();
+  pt.x = e.clientX;
+  pt.y = e.clientY;
+  const cursor = pt.matrixTransform(svg.getScreenCTM().inverse());
+
+  let dx = cursor.x - CENTER.x;
+  let dy = cursor.y - CENTER.y;
+  const dist = Math.hypot(dx, dy);
+
+  if (dist > MAX_OFFSET) {
+    dx *= MAX_OFFSET / dist;
+    dy *= MAX_OFFSET / dist;
+  }
+
+  target.x = CENTER.x + dx;
+  target.y = CENTER.y + dy;
+});
+
+function update() {
+  current.x += (target.x - current.x) * 0.08;
+  current.y += (target.y - current.y) * 0.08;
+
+  inner.setAttribute("cx", current.x);
+  inner.setAttribute("cy", current.y);
+
+  const vx = current.x - CENTER.x;
+  const vy = current.y - CENTER.y;
+  const vAngle = Math.atan2(vy, vx);
+  const vDist = Math.hypot(vx, vy) / MAX_OFFSET;
+
+  shape.forEach(p => {
+    const da = Math.atan2(
+      Math.sin(p.angle - vAngle),
+      Math.cos(p.angle - vAngle)
+    );
+    const influence = Math.exp(-da * da * 3);
+    p.currentRadius = p.radius + influence * vDist * BASE_RADIUS * DEFORM_STRENGTH;
+  });
+
+  let d = "";
+  shape.forEach((p, i) => {
+    const r = p.currentRadius || p.radius;
+    const x = CENTER.x + Math.cos(p.angle) * r;
+    const y = CENTER.y + Math.sin(p.angle) * r;
+    d += (i === 0 ? "M" : "L") + x + "," + y;
+  });
+  d += "Z";
+
+  boundary.setAttribute("d", d);
+
+  inner.style.filter =
+    `drop-shadow(${vx * 0.6}px ${vy * 0.8}px 10px rgba(0,0,0,0.45))`;
+
+  requestAnimationFrame(update);
+}
+
+update();
+</script>
+
 </body>
 </html>
+
