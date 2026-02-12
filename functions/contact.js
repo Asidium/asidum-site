@@ -1,26 +1,52 @@
-import { Resend } from 'resend';
-
-export async function onRequestPost({ request, env }) {
-  const apiKey = request.headers.get('x-api-key');
-  if (apiKey !== env.CONTACT_API_KEY) {
-    return new Response('Unauthorized', { status: 401 });
+export async function onRequest(context) {
+  if (context.request.method !== "POST") {
+    return new Response("Method Not Allowed", { status: 405 });
   }
 
-  const data = await request.json();
-  const { name, email, message } = data;
+  try {
+    const { name, email, message } = await context.request.json();
 
-  const resend = new Resend(env.CONTACT_API_KEY);
+    if (!name || !email || !message) {
+      return new Response(
+        JSON.stringify({ ok: false, error: "Missing fields" }),
+        { status: 400, headers: { "Content-Type": "application/json" } }
+      );
+    }
 
-  await resend.emails.send({
-    from: 'Asidum <info@asidum.com>',
-    to: ['info@asidum.com'],
-    reply_to: email,
-    subject: `Contact form: ${name}`,
-    text: message
-  });
+    const res = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${context.env.RESEND_API_KEY}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        from: "Asidum <info@asidum.com>",
+        to: ["info@asidum.com"],
+        reply_to: email,
+        subject: "Contact form — Asidum",
+        html: `
+          <strong>Name:</strong> ${name}<br/>
+          <strong>Email:</strong> ${email}<br/><br/>
+          <strong>Message:</strong><br/>
+          ${message.replace(/\n/g, "<br/>")}
+        `,
+      }),
+    });
 
-  return new Response(
-    JSON.stringify({ success: true }),
-    { headers: { 'Content-Type': 'application/json' } }
-  );
+    if (!res.ok) {
+      const err = await res.text();
+      throw new Error(err);
+    }
+
+    return new Response(
+      JSON.stringify({ ok: true }),
+      { headers: { "Content-Type": "application/json" } }
+    );
+
+  } catch (err) {
+    return new Response(
+      JSON.stringify({ ok: false, error: err.message }),
+      { status: 500, headers: { "Content-Type": "application/json" } }
+    );
+  }
 }
