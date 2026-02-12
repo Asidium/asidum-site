@@ -44,6 +44,7 @@
     width: 320px;
     height: 320px;
     margin-bottom: 32px;
+    overflow: visible;
   }
 
   h1 {
@@ -85,7 +86,7 @@
   <div class="status">Under development</div>
 
   <!-- INTERACTIVE LOGO -->
-  <svg viewBox="0 0 360 360">
+  <svg viewBox="0 0 360 360" id="scene">
     <defs>
       <radialGradient id="innerGrad" cx="30%" cy="30%" r="70%">
         <stop offset="0%" stop-color="#b8ccff"/>
@@ -100,7 +101,7 @@
           opacity="0.9"/>
 
     <circle id="inner"
-            r="11"
+            r="12"
             fill="url(#innerGrad)"/>
   </svg>
 
@@ -122,19 +123,26 @@
 </div>
 
 <script>
-const svg = document.querySelector("svg");
+const svg = document.getElementById("scene");
 const boundary = document.getElementById("boundary");
 const inner = document.getElementById("inner");
 
 const CENTER = { x: 180, y: 180 };
-const BASE_RADIUS = 90;
-const POINTS = 48;
-const MAX_OFFSET = 52;
-const DEFORM_STRENGTH = 1.35;
+const BASE_RADIUS = 95;
+const POINTS = 120;
+
+const MAX_OFFSET = 70;
+const DEFORM_STRENGTH = 0.38;
+const RETURN_FORCE = 0.12;
+const ANGULAR_FALLOFF = 4.5;
 
 let shape = Array.from({ length: POINTS }, (_, i) => {
   const a = (Math.PI * 2 * i) / POINTS;
-  return { angle: a, base: BASE_RADIUS, current: BASE_RADIUS };
+  return {
+    angle: a,
+    base: BASE_RADIUS,
+    current: BASE_RADIUS
+  };
 });
 
 let innerPos = { ...CENTER };
@@ -143,7 +151,6 @@ let mouseActive = false;
 
 svg.addEventListener("mousemove", e => {
   mouseActive = true;
-
   const pt = svg.createSVGPoint();
   pt.x = e.clientX;
   pt.y = e.clientY;
@@ -164,11 +171,13 @@ svg.addEventListener("mousemove", e => {
 
 svg.addEventListener("mouseleave", () => {
   mouseActive = false;
+  targetInner = { ...CENTER };
 });
 
 function update() {
-  innerPos.x += (targetInner.x - innerPos.x) * 0.08;
-  innerPos.y += (targetInner.y - innerPos.y) * 0.08;
+  // движение шара (вязкое)
+  innerPos.x += (targetInner.x - innerPos.x) * 0.1;
+  innerPos.y += (targetInner.y - innerPos.y) * 0.1;
 
   inner.setAttribute("cx", innerPos.x);
   inner.setAttribute("cy", innerPos.y);
@@ -176,27 +185,34 @@ function update() {
   const vx = innerPos.x - CENTER.x;
   const vy = innerPos.y - CENTER.y;
   const vAngle = Math.atan2(vy, vx);
-  const vDist = Math.hypot(vx, vy) / MAX_OFFSET;
+  const vDist = Math.min(1, Math.hypot(vx, vy) / MAX_OFFSET);
 
   shape.forEach(p => {
     let influence = 0;
+
     if (mouseActive) {
       const da = Math.atan2(
         Math.sin(p.angle - vAngle),
         Math.cos(p.angle - vAngle)
       );
-      influence = Math.exp(-da * da * 1.6) * vDist;
+
+      influence =
+        Math.exp(-da * da * ANGULAR_FALLOFF) *
+        vDist;
     }
 
-    const targetR = p.base + influence * BASE_RADIUS * DEFORM_STRENGTH;
-    p.current += (targetR - p.current) * 0.14;
+    const target =
+      p.base + influence * BASE_RADIUS * DEFORM_STRENGTH;
+
+    p.current += (target - p.current) * RETURN_FORCE;
   });
 
+  // SVG path
   let d = "";
   shape.forEach((p, i) => {
     const x = CENTER.x + Math.cos(p.angle) * p.current;
     const y = CENTER.y + Math.sin(p.angle) * p.current;
-    d += (i === 0 ? "M" : "L") + x + "," + y;
+    d += (i === 0 ? "M" : "L") + x + " " + y;
   });
   d += "Z";
 
