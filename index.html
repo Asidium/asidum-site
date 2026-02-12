@@ -8,91 +8,104 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
-:root {
-  --bg: #141820;
-  --fg: #eef1f5;
-  --muted: #aab1bc;
-  --accent: #8fb1ff;
-  --logo: #16234a;
-}
+  :root {
+    --bg: #141820;
+    --fg: #eef1f5;
+    --muted: #aab1bc;
+    --stroke: #cfd5df;
+    --accent: #8fb1ff;
+    --ink: #1a2b57;
+  }
 
-body {
-  margin: 0;
-  height: 100vh;
-  background: radial-gradient(circle at 50% 30%, #1b2130, var(--bg));
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--fg);
-  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-}
+  body {
+    margin: 0;
+    height: 100vh;
+    background: radial-gradient(circle at 50% 30%, #1b2130, var(--bg));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--fg);
+    font-family: system-ui, -apple-system, BlinkMacSystemFont,
+                 "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
 
-.wrap {
-  text-align: center;
-}
+  .wrap {
+    text-align: center;
+  }
 
-.status {
-  font-size: 13px;
-  letter-spacing: .08em;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin-bottom: 20px;
-}
+  .status {
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 18px;
+  }
 
-svg {
-  width: 320px;
-  height: 320px;
-  margin-bottom: 32px;
-}
+  svg {
+    width: 340px;
+    height: 340px;
+    margin-bottom: 34px;
+    overflow: visible;
+  }
 
-h1 {
-  margin: 0 0 12px;
-  font-size: 44px;
-  font-weight: 600;
-  letter-spacing: .06em;
-}
+  h1 {
+    margin: 0 0 12px;
+    font-size: 44px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+  }
 
-.tagline {
-  font-size: 16px;
-  line-height: 1.7;
-  color: var(--muted);
-  margin-bottom: 22px;
-}
+  .tagline {
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--muted);
+    margin-bottom: 22px;
+  }
 
-.contact a {
-  color: var(--fg);
-  text-decoration: none;
-  border-bottom: 1px solid rgba(255,255,255,.3);
-}
+  .contact a {
+    color: var(--fg);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255,255,255,0.3);
+  }
 
-footer {
-  margin-top: 30px;
-  font-size: 13px;
-  color: #7f8794;
-}
+  .contact a:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+
+  footer {
+    margin-top: 30px;
+    font-size: 13px;
+    color: #7f8794;
+  }
 </style>
 </head>
 
 <body>
 <div class="wrap">
+
   <div class="status">Under development</div>
 
-  <svg viewBox="0 0 360 360" id="scene">
+  <!-- INTERACTIVE LOGO -->
+  <svg viewBox="0 0 360 360">
     <defs>
-      <radialGradient id="ballGrad" cx="30%" cy="30%" r="70%">
+      <radialGradient id="innerGrad" cx="30%" cy="30%" r="70%">
         <stop offset="0%" stop-color="#b8ccff"/>
         <stop offset="100%" stop-color="#5a7de0"/>
       </radialGradient>
     </defs>
 
-    <!-- outer static C -->
-    <path id="outer" fill="var(--logo)"/>
+    <!-- ВНЕШНИЙ КРУГ -->
+    <circle cx="180" cy="180" r="140"
+            fill="none"
+            stroke="var(--ink)"
+            stroke-width="34"/>
 
-    <!-- inner deformable -->
-    <path id="innerContour" fill="var(--bg)"/>
+    <!-- ВНУТРЕННЯЯ ФОРМА (деформируемая) -->
+    <path id="innerShape" fill="var(--ink)"/>
 
-    <!-- ball -->
-    <circle id="ball" r="12" fill="url(#ballGrad)"/>
+    <!-- ШАР -->
+    <circle id="ball" r="11" fill="url(#innerGrad)"/>
   </svg>
 
   <h1>Asidum</h1>
@@ -107,26 +120,30 @@ footer {
   </div>
 
   <footer>© 2026 Asidum</footer>
+
 </div>
 
 <script>
-const CENTER = { x:180, y:180 };
-const R_OUT = 120;
-const R_IN  = 78;
-const GAP = Math.PI * 0.45;
+const svg = document.querySelector("svg");
+const shapePath = document.getElementById("innerShape");
+const ball = document.getElementById("ball");
 
-const POINTS = 140;
+const CENTER = { x: 180, y: 180 };
+const BASE_RADIUS = 82;
+const POINTS = 120;
 const MAX_OFFSET = 58;
 
-const outer = document.getElementById("outer");
-const innerContour = document.getElementById("innerContour");
-const ball = document.getElementById("ball");
-const svg = document.getElementById("scene");
-
+let mouseActive = false;
+let targetBall = { ...CENTER };
 let ballPos = { ...CENTER };
-let target = { ...CENTER };
+
+const shape = Array.from({ length: POINTS }, (_, i) => {
+  const angle = (Math.PI * 2 * i) / POINTS;
+  return { angle, base: BASE_RADIUS, current: BASE_RADIUS };
+});
 
 svg.addEventListener("mousemove", e => {
+  mouseActive = true;
   const pt = svg.createSVGPoint();
   pt.x = e.clientX;
   pt.y = e.clientY;
@@ -141,50 +158,54 @@ svg.addEventListener("mousemove", e => {
     dy *= MAX_OFFSET / d;
   }
 
-  target.x = CENTER.x + dx;
-  target.y = CENTER.y + dy;
+  targetBall.x = CENTER.x + dx;
+  targetBall.y = CENTER.y + dy;
 });
 
 svg.addEventListener("mouseleave", () => {
-  target.x = CENTER.x;
-  target.y = CENTER.y;
+  mouseActive = false;
+  targetBall.x = CENTER.x;
+  targetBall.y = CENTER.y;
 });
 
-function buildRing(r, deform=false) {
-  let d = "";
-  for (let i=0;i<=POINTS;i++) {
-    const a = GAP/2 + (Math.PI*2-GAP)*(i/POINTS);
-    let rr = r;
-
-    if (deform) {
-      const dx = Math.cos(a)*r + CENTER.x - ballPos.x;
-      const dy = Math.sin(a)*r + CENTER.y - ballPos.y;
-      const dist = Math.hypot(dx,dy);
-      rr += Math.exp(-dist*0.05)*22;
-    }
-
-    const x = CENTER.x + Math.cos(a)*rr;
-    const y = CENTER.y + Math.sin(a)*rr;
-    d += (i===0?"M":"L")+x+","+y;
-  }
-  return d;
-}
-
 function update() {
-  ballPos.x += (target.x - ballPos.x)*0.12;
-  ballPos.y += (target.y - ballPos.y)*0.12;
+  // движение шара
+  ballPos.x += (targetBall.x - ballPos.x) * 0.09;
+  ballPos.y += (targetBall.y - ballPos.y) * 0.09;
 
   ball.setAttribute("cx", ballPos.x);
   ball.setAttribute("cy", ballPos.y);
 
-  outer.setAttribute("d",
-    buildRing(R_OUT,false) +
-    "L"+buildRing(R_IN,false).split("M")[1]+"Z"
-  );
+  // деформация внутреннего контура
+  shape.forEach(p => {
+    const px = CENTER.x + Math.cos(p.angle) * p.current;
+    const py = CENTER.y + Math.sin(p.angle) * p.current;
 
-  innerContour.setAttribute("d",
-    buildRing(R_IN,true)+"Z"
-  );
+    const dx = px - ballPos.x;
+    const dy = py - ballPos.y;
+    const dist = Math.hypot(dx, dy);
+
+    let influence = 0;
+    if (mouseActive) {
+      influence = Math.exp(-(dist * dist) / (2 * 800));
+    }
+
+    const targetR =
+      p.base + influence * 46;
+
+    p.current += (targetR - p.current) * 0.13;
+  });
+
+  // построение пути
+  let d = "";
+  shape.forEach((p, i) => {
+    const x = CENTER.x + Math.cos(p.angle) * p.current;
+    const y = CENTER.y + Math.sin(p.angle) * p.current;
+    d += (i === 0 ? "M" : "L") + x + "," + y;
+  });
+  d += "Z";
+
+  shapePath.setAttribute("d", d);
 
   requestAnimationFrame(update);
 }
