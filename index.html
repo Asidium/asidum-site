@@ -12,9 +12,7 @@
     --bg: #141820;
     --fg: #eef1f5;
     --muted: #aab1bc;
-    --stroke: #cfd5df;
     --accent: #8fb1ff;
-    --ink: #1a2b57;
   }
 
   body {
@@ -38,14 +36,14 @@
     letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--muted);
-    margin-bottom: 18px;
+    margin-bottom: 22px;
   }
 
-  svg {
-    width: 340px;
-    height: 340px;
-    margin-bottom: 34px;
-    overflow: visible;
+  .logo {
+    width: 280px;
+    height: auto;
+    margin-bottom: 36px;
+    display: block;
   }
 
   h1 {
@@ -82,31 +80,18 @@
 </head>
 
 <body>
+
 <div class="wrap">
 
   <div class="status">Under development</div>
 
-  <!-- INTERACTIVE LOGO -->
-  <svg viewBox="0 0 360 360">
-    <defs>
-      <radialGradient id="innerGrad" cx="30%" cy="30%" r="70%">
-        <stop offset="0%" stop-color="#b8ccff"/>
-        <stop offset="100%" stop-color="#5a7de0"/>
-      </radialGradient>
-    </defs>
-
-    <!-- ВНЕШНИЙ КРУГ -->
-    <circle cx="180" cy="180" r="140"
-            fill="none"
-            stroke="var(--ink)"
-            stroke-width="34"/>
-
-    <!-- ВНУТРЕННЯЯ ФОРМА (деформируемая) -->
-    <path id="innerShape" fill="var(--ink)"/>
-
-    <!-- ШАР -->
-    <circle id="ball" r="11" fill="url(#innerGrad)"/>
-  </svg>
+  <!-- LOGO -->
+  <img
+    src="/logo/asidum-logo.png"
+    alt="Asidum logo"
+    class="logo"
+    draggable="false"
+  />
 
   <h1>Asidum</h1>
 
@@ -119,73 +104,11 @@
     <a href="mailto:info@asidum.com">info@asidum.com</a>
   </div>
 
-  <footer>© 2026 Asidum</footer>
+  <footer>
+    © 2026 Asidum
+  </footer>
 
 </div>
 
-<script>
-const canvas = document.getElementById("logo");
-const ctx = canvas.getContext("2d");
-const outerRadius = 200;
-const center = { x: canvas.width/2, y: canvas.height/2 };
-let mouse = { x: center.x, y: center.y };
-let inner = { x: center.x, y: center.y, r: 40, vx: 0, vy: 0 };
-canvas.addEventListener("mousemove", e => {
- const rect = canvas.getBoundingClientRect();
- mouse.x = e.clientX - rect.left;
- mouse.y = e.clientY - rect.top;
-});
-function update() {
- // движение шара к мышке
- let dx = mouse.x - inner.x;
- let dy = mouse.y - inner.y;
- inner.vx += dx * 0.05;
- inner.vy += dy * 0.05;
- inner.vx *= 0.9; // трение
- inner.vy *= 0.9;
- inner.x += inner.vx;
- inner.y += inner.vy;
- // проверка столкновения с окружностью
- let dist = Math.hypot(inner.x - center.x, inner.y - center.y);
- if (dist + inner.r > outerRadius) {
-   // отталкивание
-   let angle = Math.atan2(inner.y - center.y, inner.x - center.x);
-   inner.x = center.x + Math.cos(angle) * (outerRadius - inner.r);
-   inner.y = center.y + Math.sin(angle) * (outerRadius - inner.r);
-   inner.vx *= -0.6;
-   inner.vy *= -0.6;
- }
-}
-function draw() {
- ctx.clearRect(0,0,canvas.width,canvas.height);
- // внешняя окружность
- ctx.beginPath();
- ctx.arc(center.x, center.y, outerRadius, 0, Math.PI*2);
- ctx.strokeStyle = "#0af";
- ctx.lineWidth = 8;
- ctx.stroke();
- // внутренний шар
- ctx.beginPath();
- ctx.arc(inner.x, inner.y, inner.r, 0, Math.PI*2);
- ctx.fillStyle = "#09f";
- ctx.fill();
- // язык (соединение)
- let angle = Math.atan2(inner.y - center.y, inner.x - center.x);
- let attachX = center.x + Math.cos(angle) * outerRadius;
- let attachY = center.y + Math.sin(angle) * outerRadius;
- ctx.beginPath();
- ctx.moveTo(inner.x, inner.y);
- ctx.lineTo(attachX, attachY);
- ctx.strokeStyle = "#0af";
- ctx.lineWidth = 4;
- ctx.stroke();
-}
-function loop() {
- update();
- draw();
- requestAnimationFrame(loop);
-}
-loop();
-</script>
 </body>
 </html>
