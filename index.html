@@ -5,9 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <title>ASIDUM — Modular Underwater Systems</title>
-  <meta name="description" content="Just explore. Simply. ASIDUM engineers modular ROV platforms for real-world underwater research and scalable production." />
+  <meta name="description" content="Just explore. Simply. ASIDUM engineers modular ROV platforms designed for real-world underwater research, inspection, and scalable production." />
 
-  <!-- Favicons -->
   <link rel="icon" href="/favicon.ico" sizes="any" />
   <link rel="icon" type="image/svg+xml" href="/Logo1.svg" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
@@ -20,13 +19,15 @@
       --muted:#5b6777;
       --line:rgba(17,24,39,.10);
       --accent:#2b6cb0;
+      --accent2:#2f855a;
 
       --max:1120px;
       --radius:18px;
-      --headerH:86px;
+      --headerH:84px; /* a bit taller to fit tagline in header */
     }
 
     *{box-sizing:border-box}
+    html,body{height:100%}
     html{scroll-behavior:smooth}
     body{
       margin:0;
@@ -34,344 +35,610 @@
       background:var(--bg);
       color:var(--fg);
       padding-top:var(--headerH);
+      overflow-x:hidden;
     }
-    a{color:inherit; text-decoration:none}
+    a{color:inherit}
     .wrap{max-width:var(--max); margin:0 auto; padding:0 20px}
 
-    /* ================= HEADER ================= */
+    /* ===== Header (fixed) ===== */
     header{
       position:fixed;
-      inset:0 0 auto 0;
+      top:0; left:0; right:0;
       height:var(--headerH);
-      z-index:1000;
+      z-index:9999;
       background:rgba(245,247,251,.96);
       border-bottom:1px solid var(--line);
+      box-shadow:0 2px 14px rgba(17,24,39,.08);
       backdrop-filter:saturate(140%) blur(10px);
     }
     .nav{
-      height:100%;
+      height:var(--headerH);
       display:flex;
       align-items:center;
       justify-content:space-between;
-      gap:20px;
+      gap:18px;
     }
 
-    /* Lockup (logo + ASIDUM on one line, tagline below) */
-    .lockup{
+    /* Brand block: two lines (line1 brand, line2 tagline) */
+    .brand{
       display:flex;
       align-items:center;
-      gap:14px;
+      gap:12px;
+      text-decoration:none;
+      min-width:320px;
     }
-    .lockup .mark{
+    .brand img{
       width:52px;
       height:52px;
+      display:block;
+      opacity:.95;
       flex:0 0 auto;
     }
-    .lockup .text{
+    .brandtext{
       display:flex;
       flex-direction:column;
+      line-height:1.1;
       gap:6px;
+      min-width:0;
     }
-    .lockup .wordmark{
-      font-size:18px;
-      font-weight:900;
-      letter-spacing:.12em;
-      line-height:1;
+    .brandline{
+      display:flex;
+      gap:10px;
+      align-items:baseline;
       white-space:nowrap;
+      min-width:0;
     }
-    .lockup .tagline{
+    .brandline .brandword{
+      font-size:15px;
+      letter-spacing:.10em;
+      font-weight:800;
+    }
+    .brandline .descriptor{
+      font-size:12px;
+      letter-spacing:.04em;
+      font-weight:400;
+      color:var(--muted);
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+    .brandtag{
       font-size:12px;
       color:var(--muted);
-      line-height:1.1;
+      letter-spacing:.02em;
+      white-space:nowrap;
     }
 
-    nav{
+    .navlinks{
       display:flex;
       gap:10px;
       flex-wrap:wrap;
+      justify-content:flex-end;
+      align-items:center;
     }
-    nav a{
-      font-size:13px;
+    .navlinks a{
+      text-decoration:none;
       color:var(--muted);
+      font-size:13px;
       padding:8px 10px;
       border-radius:999px;
+      border:1px solid transparent;
     }
-    nav a:hover{
+    .navlinks a:hover{
       color:var(--fg);
+      border-color:var(--line);
       background:rgba(17,24,39,.04);
     }
 
-    /* ================= SECTIONS ================= */
+    /* ===== Sections ===== */
+    main{padding-bottom:44px}
     section{
-      padding:52px 0;
+      padding:46px 0;
       border-top:1px solid var(--line);
-      scroll-margin-top: calc(var(--headerH) + 16px);
+      scroll-margin-top: calc(var(--headerH) + 18px);
     }
 
-    /* ================= HERO ================= */
-    .hero{border-top:none}
+    /* ===== Hero ===== */
+    .hero{border-top:none; padding:38px 0 28px;}
     .hero-card{
       background:
         radial-gradient(900px 520px at 20% 0%, rgba(43,108,176,.12), transparent 62%),
         radial-gradient(900px 520px at 80% 10%, rgba(47,133,90,.10), transparent 62%),
         #ffffff;
       border:1px solid var(--line);
-      border-radius:26px;
-      padding:42px 34px;
-      box-shadow:0 18px 40px rgba(17,24,39,.10);
+      border-radius:24px;
+      box-shadow:0 14px 40px rgba(17,24,39,.08);
+      padding:34px 28px;
+      overflow:hidden;
     }
-
-    .hero .lockup{
-      align-items:flex-start;
-      gap:22px;
-    }
-    .hero .lockup .mark{
-      width:140px;
-      height:140px;
-    }
-    .hero .lockup .wordmark{
-      font-size:76px;
-      letter-spacing:-.02em;
-    }
-    .hero .lockup .tagline{
-      font-size:14px;
-      margin-top:2px;
-    }
-
-    .hero p{
-      max-width:900px;
-      margin:16px 0 0;
-      font-size:18px;
+    .kicker{
+      display:inline-flex;
+      gap:10px;
+      align-items:center;
+      font-size:12px;
       color:var(--muted);
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.75);
+      padding:8px 12px;
+      border-radius:999px;
+    }
+
+    /* Hero brand line + tagline below */
+    .hero-brand{
+      display:flex;
+      align-items:flex-start;
+      gap:18px;
+      margin-top:18px;
+    }
+    .hero-brand img{
+      width:120px;
+      height:120px;
+      display:block;
+      opacity:.95;
+      flex:0 0 auto;
+    }
+    .hero-brandtext{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      min-width:0;
+    }
+    .hero-brandline{
+      display:flex;
+      gap:14px;
+      align-items:baseline;
+      flex-wrap:wrap;
+    }
+    .hero-brandline .brandword{
+      font-size:56px;
+      line-height:1.02;
+      letter-spacing:-.02em;
+      font-weight:900;
+    }
+    .hero-brandline .descriptor{
+      font-size:44px;
+      line-height:1.02;
+      letter-spacing:-.02em;
+      font-weight:400; /* not bold */
+      color:var(--fg);
+      opacity:.95;
+    }
+    .hero-tag{
+      font-size:14px;
+      color:var(--muted);
+      letter-spacing:.02em;
+      margin-top:-2px;
+    }
+
+    .sub{
+      margin:12px 0 0;
+      max-width:920px;
+      color:var(--muted);
+      font-size:18px;
     }
 
     .cta{
-      margin-top:22px;
       display:flex;
       gap:12px;
       flex-wrap:wrap;
+      margin-top:18px;
     }
     .btn{
-      padding:12px 18px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      padding:12px 16px;
       border-radius:999px;
       border:1px solid var(--line);
-      background:#fff;
+      background:#ffffff;
+      text-decoration:none;
       font-weight:600;
       font-size:14px;
+      color:var(--fg);
     }
+    .btn:hover{background:rgba(17,24,39,.03)}
     .btn.primary{
-      background:rgba(43,108,176,.12);
-      border-color:rgba(43,108,176,.35);
+      border-color:rgba(43,108,176,.30);
+      background:rgba(43,108,176,.10);
+    }
+    .btn.primary:hover{background:rgba(43,108,176,.14)}
+
+    .section-title{
+      margin:0 0 10px;
+      font-size:13px;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      color:var(--muted);
+    }
+    .section-lead{
+      margin:0 0 18px;
+      font-size:22px;
+      line-height:1.25;
+      letter-spacing:-.01em;
     }
 
-    /* ================= GRID & PANELS ================= */
     .grid{
       display:grid;
       grid-template-columns:1fr;
-      gap:18px;
+      gap:16px;
       align-items:stretch;
     }
-    @media(min-width:900px){
-      .grid.two{grid-template-columns:1.15fr .85fr}
-      .grid.cards{grid-template-columns:repeat(2,1fr)}
+    @media (min-width: 900px){
+      .grid.two{grid-template-columns: 1.15fr .85fr}
+      .grid.cards{grid-template-columns: repeat(2, 1fr)}
     }
 
     .panel{
       background:var(--panel);
       border:1px solid var(--line);
       border-radius:var(--radius);
-      padding:20px;
-      box-shadow:0 10px 24px rgba(17,24,39,.06);
-      height:100%;
+      padding:18px;
+      box-shadow:0 10px 26px rgba(17,24,39,.06);
+      min-height:100%;
     }
-    .panel h3{margin:0 0 10px; font-size:16px}
-    .panel p, ul{margin:0; color:var(--muted)}
-    ul{padding-left:18px}
-    li{margin:8px 0}
+    .panel h3{margin:0 0 10px; font-size:16px; letter-spacing:-.01em}
+    .panel p{margin:0; color:var(--muted)}
+    ul.clean{margin:0; padding-left:18px; color:var(--muted)}
+    ul.clean li{margin:8px 0}
 
-    .section-title{
-      font-size:13px;
-      letter-spacing:.14em;
-      text-transform:uppercase;
+    .callout{
+      border:1px dashed rgba(43,108,176,.35);
+      background:rgba(43,108,176,.06);
+      border-radius:var(--radius);
+      padding:18px;
       color:var(--muted);
-      margin-bottom:8px;
+      min-height:100%;
     }
-    .section-lead{
-      font-size:22px;
-      margin:0 0 18px;
+    .callout b{color:var(--fg)}
+
+    .divider{height:1px; background:var(--line); margin:14px 0}
+    .mono{font-family: ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; font-size:13px; color:var(--muted)}
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:rgba(17,24,39,.02);
+      color:var(--muted);
+      font-size:12px;
+      white-space:nowrap;
+    }
+    .dot{
+      width:8px; height:8px;
+      border-radius:999px;
+      background:rgba(43,108,176,.65);
+      display:inline-block;
     }
 
     .placeholder{
       border:1px dashed rgba(17,24,39,.18);
       background:rgba(17,24,39,.02);
       border-radius:14px;
-      padding:16px;
+      padding:14px;
+      box-shadow:none;
     }
-    .badge{
-      display:inline-flex;
+    .placeholder-title{
+      display:flex;
       align-items:center;
-      gap:8px;
-      font-size:12px;
-      color:var(--muted);
-      border:1px solid var(--line);
-      border-radius:999px;
-      padding:6px 10px;
+      justify-content:space-between;
+      gap:12px;
       margin-bottom:10px;
     }
-    .dot{
-      width:8px;
-      height:8px;
-      border-radius:50%;
-      background:var(--accent);
-    }
-
-    footer{
-      border-top:1px solid var(--line);
-      padding:30px 0 48px;
-      color:var(--muted);
+    .placeholder-title b{
+      font-weight:700;
+      color:var(--fg);
       font-size:13px;
     }
+    .placeholder p{margin:0; color:var(--muted); font-size:13px}
+    .placeholder ul{margin:10px 0 0; padding-left:18px; color:var(--muted); font-size:13px}
+    .placeholder li{margin:6px 0}
 
-    /* ================= MOBILE ================= */
-    @media(max-width:800px){
-      .hero .lockup{
-        flex-wrap:wrap;
+    .foot{
+      padding:28px 0 48px;
+      color:var(--muted);
+      font-size:13px;
+      border-top:1px solid var(--line);
+    }
+
+    /* ===== Mobile ===== */
+    @media (max-width: 980px){
+      .hero-brand{flex-wrap:wrap}
+      .hero-brand img{width:90px; height:90px}
+      .hero-brandline .brandword{font-size:44px}
+      .hero-brandline .descriptor{font-size:34px}
+    }
+    @media (max-width: 720px){
+      :root{--headerH:78px;}
+      .nav{gap:10px}
+      .brand{min-width:auto}
+      .brandline .descriptor{display:none} /* keep header compact */
+      .navlinks{
+        flex-wrap:nowrap;
+        overflow:auto;
+        -webkit-overflow-scrolling:touch;
+        max-width:60vw;
+        padding-bottom:2px;
       }
-      .hero .lockup .mark{
-        width:100px;
-        height:100px;
-      }
-      .hero .lockup .wordmark{
-        font-size:48px;
-      }
+      .navlinks a{white-space:nowrap}
+      .brand img{width:44px; height:44px}
+      .brandtag{display:none} /* optional: hide tagline in header on very small screens */
     }
   </style>
 </head>
 
 <body>
-
-<header>
-  <div class="wrap">
-    <div class="nav">
-      <a href="#top" class="lockup">
-        <img src="/Logo1.svg" alt="ASIDUM logo" class="mark" />
-        <div class="text">
-          <div class="wordmark">ASIDUM</div>
-          <div class="tagline">Just explore. Simply.</div>
-        </div>
-      </a>
-
-      <nav>
-        <a href="#what">What we build</a>
-        <a href="#approach">Engineering approach</a>
-        <a href="#vision">Vision</a>
-        <a href="#architecture">Architecture</a>
-        <a href="#partner">Partnership</a>
-      </nav>
-    </div>
-  </div>
-</header>
-
-<main id="top">
-
-  <!-- HERO -->
-  <section class="hero">
+  <header>
     <div class="wrap">
-      <div class="hero-card">
-        <div class="lockup">
-          <img src="/Logo1.svg" alt="ASIDUM logo" class="mark" />
-          <div class="text">
-            <div class="wordmark">ASIDUM</div>
-            <div class="tagline">Just explore. Simply.</div>
+      <div class="nav">
+        <a class="brand" href="#top" aria-label="ASIDUM Home">
+          <img src="/Logo1.svg" alt="ASIDUM logo" draggable="false" />
+          <div class="brandtext">
+            <!-- one line -->
+            <div class="brandline">
+              <span class="brandword">ASIDUM</span>
+              <span class="descriptor">Modular Underwater Systems</span>
+            </div>
+            <!-- tagline under it -->
+            <div class="brandtag">Just explore. Simply.</div>
+          </div>
+        </a>
+
+        <nav class="navlinks" aria-label="Primary">
+          <a href="#what">What we build</a>
+          <a href="#approach">Engineering approach</a>
+          <a href="#vision">Vision</a>
+          <a href="#architecture">Architecture</a>
+          <a href="#partner">Partnership</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- HERO -->
+    <div class="wrap">
+      <section class="hero">
+        <div class="hero-card">
+          <div class="kicker">Underwater robotics • Modular systems • Production-ready design</div>
+
+          <div class="hero-brand">
+            <img src="/Logo1.svg" alt="ASIDUM" draggable="false" />
+            <div class="hero-brandtext">
+              <!-- one line -->
+              <div class="hero-brandline">
+                <span class="brandword">ASIDUM</span>
+                <span class="descriptor">Modular Underwater Systems</span>
+              </div>
+              <!-- tagline under it -->
+              <div class="hero-tag">Just explore. Simply.</div>
+            </div>
+          </div>
+
+          <p class="sub">
+            We engineer modular ROV platforms designed for real-world underwater research, inspection, and scalable production.
+          </p>
+
+          <div class="cta">
+            <a class="btn primary" href="#architecture">View Concept</a>
+            <a class="btn" href="#partner">Partnership &amp; Investment</a>
           </div>
         </div>
+      </section>
+    </div>
 
-        <p>
-          We engineer modular ROV platforms designed for real-world underwater research,
-          inspection, and scalable production.
+    <!-- WHAT WE BUILD -->
+    <section id="what">
+      <div class="wrap">
+        <div class="section-title">What we build</div>
+        <div class="grid two">
+          <div>
+            <p class="section-lead">
+              We develop <b>modular underwater ROV platforms</b> designed as complete systems rather than isolated devices.
+            </p>
+            <div class="panel">
+              <h3>Our focus</h3>
+              <ul class="clean">
+                <li><b>Modular ROV architectures</b> — Interchangeable propulsion, power, and payload modules enabling fast configuration changes.</li>
+                <li><b>Scalable control systems</b> — From compact research platforms to larger inspection-oriented configurations.</li>
+                <li><b>Manufacturing-ready design</b> — Engineered for repeatability, assembly, and pilot-to-series production.</li>
+                <li><b>Reliability-driven engineering</b> — Mechanical simplicity, controlled interfaces, and predictable behavior under real underwater conditions.</li>
+                <li><b>Application flexibility</b> — Research, inspection, prototyping, and custom underwater applications.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="panel">
+            <h3>Architecture diagram in progress</h3>
+            <div class="divider"></div>
+            <div class="placeholder">
+              <div class="placeholder-title">
+                <b>High-level module map (v1)</b>
+                <span class="pill"><span class="dot"></span> Work in progress</span>
+              </div>
+              <p>
+                We are preparing a clean system diagram that shows modules and interfaces without exposing sensitive details.
+              </p>
+              <ul>
+                <li>Propulsion / Power / Control / Payload layers</li>
+                <li>Interface boundaries and upgrade paths</li>
+                <li>Example configuration options</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ENGINEERING APPROACH -->
+    <section id="approach">
+      <div class="wrap">
+        <div class="section-title">Engineering approach</div>
+        <p class="section-lead">
+          We approach underwater systems as <b>integrated engineering products</b>, not experimental assemblies.
         </p>
 
-        <div class="cta">
-          <a href="#architecture" class="btn primary">View concept</a>
-          <a href="#partner" class="btn">Partnership &amp; investment</a>
+        <div class="grid cards">
+          <div class="panel">
+            <h3>System architecture first</h3>
+            <p>Mechanical, electrical, and software decisions are made within a single system model, not in isolation.</p>
+          </div>
+          <div class="panel">
+            <h3>Design for manufacturability from day one</h3>
+            <p>Geometry, tolerances, materials, and interfaces are selected with real production processes in mind.</p>
+          </div>
+          <div class="panel">
+            <h3>Modularity as a controlled strategy</h3>
+            <p>Modules are defined by clear interfaces. Modularity must reduce complexity, not multiply it.</p>
+          </div>
+          <div class="panel">
+            <h3>Reliability over feature density</h3>
+            <p>Fewer mechanisms, fewer failure modes, predictable behavior under pressure and long operating cycles.</p>
+          </div>
+          <div class="panel">
+            <h3>Engineering before optimization</h3>
+            <p>Stable architecture precedes performance tuning, cost reduction, and scaling.</p>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- WHAT WE BUILD -->
-  <section id="what">
-    <div class="wrap">
-      <div class="section-title">What we build</div>
-      <div class="grid two">
-        <div>
-          <p class="section-lead">
-            We develop <b>modular underwater ROV platforms</b> designed as complete systems.
-          </p>
+    <!-- PRODUCT VISION / ROADMAP -->
+    <section id="vision">
+      <div class="wrap">
+        <div class="section-title">Product vision</div>
+        <p class="section-lead">
+          ASIDUM is focused on building <b>production-ready modular ROV platforms</b>, not one-off experimental systems.
+        </p>
+
+        <div class="grid two">
           <div class="panel">
-            <ul>
-              <li>Modular propulsion, power, and payload architecture</li>
-              <li>Scalable control systems</li>
-              <li>Manufacturing-ready engineering</li>
-              <li>Reliability-driven design</li>
+            <h3>Roadmap</h3>
+            <ul class="clean">
+              <li><b>Concept &amp; Architecture</b> — System-level architecture definition; modular interfaces; target operating envelopes.</li>
+              <li><b>Prototype &amp; Validation</b> — Functional prototypes; environmental validation; iterative refinement based on real-world use.</li>
+              <li><b>Pilot Platforms</b> — Integrated pilot platforms; assembly and serviceability validation; limited-series readiness.</li>
+              <li><b>Scalable Production</b> — Design freeze on core modules; supplier/process alignment; transition to repeatable production.</li>
             </ul>
           </div>
-        </div>
 
-        <div class="panel">
-          <div class="badge"><span class="dot"></span> Architecture diagram in progress</div>
-          <div class="placeholder">
-            High-level module map (interfaces + replaceable blocks).  
-            Final diagram will be added here.
+          <div class="callout">
+            <b>What this enables</b>
+            <div class="divider"></div>
+            <ul class="clean">
+              <li>Clear path from idea to product</li>
+              <li>Risk reduction through staged validation</li>
+              <li>Flexibility for different market segments</li>
+              <li>Transparency for partners and investors</li>
+            </ul>
+            <div class="divider"></div>
+            <span class="mono">We prioritize engineering maturity before acceleration.</span>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ENGINEERING APPROACH -->
-  <section id="approach">
-    <div class="wrap">
-      <div class="section-title">Engineering approach</div>
-      <p class="section-lead">
-        Integrated engineering products, not experimental assemblies.
-      </p>
+    <!-- VISUAL CONCEPT & ARCHITECTURE -->
+    <section id="architecture">
+      <div class="wrap">
+        <div class="section-title">Visual concept &amp; architecture</div>
+        <p class="section-lead">
+          Platforms are designed around a <b>clear modular system architecture</b> with controlled interfaces and predictable behavior.
+        </p>
 
-      <div class="grid cards">
-        <div class="panel"><h3>System architecture first</h3><p>All decisions made within one system model.</p></div>
-        <div class="panel"><h3>Design for manufacturability</h3><p>Production constraints considered from day one.</p></div>
-        <div class="panel"><h3>Controlled modularity</h3><p>Clear interfaces reduce complexity.</p></div>
-        <div class="panel"><h3>Reliability focus</h3><p>Predictable behavior under real conditions.</p></div>
+        <div class="grid two">
+          <div class="panel">
+            <h3>Core system layers</h3>
+            <ul class="clean">
+              <li><b>Propulsion layer</b> — Modular thruster units with standardized mechanical and electrical interfaces.</li>
+              <li><b>Power &amp; distribution</b> — Centralized power management with scalable battery or tether-based configurations.</li>
+              <li><b>Control &amp; communication</b> — Unified control architecture for sensors, navigation, and payload control.</li>
+              <li><b>Structural framework</b> — Load-bearing frame designed as a carrier for modules.</li>
+              <li><b>Payload &amp; mission modules</b> — Mission-specific components isolated from the core system.</li>
+            </ul>
+            <div class="divider"></div>
+            <h3 style="margin-top:0;">Design logic</h3>
+            <ul class="clean">
+              <li>Defined interfaces over custom solutions</li>
+              <li>Replaceable modules over permanent assemblies</li>
+              <li>System predictability over maximum performance</li>
+            </ul>
+          </div>
+
+          <div class="panel">
+            <h3>Insert your diagram / render</h3>
+            <p>
+              One strong visual will go here: a block diagram, exploded-view logic, or a clean concept render. Labels will remain minimal.
+            </p>
+            <div class="divider"></div>
+
+            <div class="placeholder">
+              <div class="placeholder-title">
+                <b>System diagram placeholder</b>
+                <span class="pill"><span class="dot"></span> In development</span>
+              </div>
+              <p>
+                The final graphic will show module boundaries and interfaces. This section is being refined.
+              </p>
+              <ul>
+                <li>High-level blocks (no internal details)</li>
+                <li>Standardized interfaces highlighted</li>
+                <li>Example configuration options</li>
+              </ul>
+            </div>
+
+            <!-- Later:
+            <img src="/architecture.png" alt="ASIDUM system architecture" style="width:100%; border-radius:14px; border:1px solid var(--line); margin-top:12px;" />
+            -->
+          </div>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- PARTNERSHIP -->
-  <section id="partner">
-    <div class="wrap">
-      <div class="section-title">Partnership &amp; investment</div>
-      <p class="section-lead">
-        Open to focused discussions with partners and early-stage investors.
-      </p>
+    <!-- PARTNERSHIP & INVESTMENT -->
+    <section id="partner">
+      <div class="wrap">
+        <div class="section-title">Partnership &amp; investment</div>
+        <p class="section-lead">
+          ASIDUM is open to <b>strategic partnerships, pilot projects, and early-stage investment discussions</b> aligned with our engineering and product roadmap.
+        </p>
 
-      <div class="panel">
-        <p><b>Email:</b> <a href="mailto:info@asidum.com">info@asidum.com</a></p>
-        <p><b>Location:</b> Türkiye / EU</p>
+        <div class="grid two">
+          <div class="panel">
+            <h3>Collaboration interests</h3>
+            <ul class="clean">
+              <li>Underwater research and inspection platforms</li>
+              <li>Manufacturing, components, and system integration</li>
+              <li>Pilot deployments and early customer validation</li>
+            </ul>
+            <div class="divider"></div>
+            <p class="mono">
+              If you are exploring technical collaboration, industrial partnership, or investment opportunities,
+              we are open to a focused discussion.
+            </p>
+          </div>
+
+          <div class="panel">
+            <h3>Contact</h3>
+            <p><b>Email:</b> <a href="mailto:info@asidum.com">info@asidum.com</a></p>
+            <p><b>Location:</b> Türkiye / EU</p>
+            <div class="divider"></div>
+            <a class="btn primary" href="mailto:info@asidum.com?subject=ASIDUM%20—%20Partnership%20%26%20Investment">Email ASIDUM</a>
+          </div>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <footer>
     <div class="wrap">
-      © <span id="y"></span> ASIDUM
+      <footer class="foot">
+        <div>© <span id="y"></span> ASIDUM. All rights reserved.</div>
+      </footer>
     </div>
-  </footer>
+  </main>
 
-</main>
-
-<script>
-  document.getElementById("y").textContent = new Date().getFullYear();
-</script>
-
+  <script>
+    document.getElementById("y").textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
