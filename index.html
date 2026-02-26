@@ -3,8 +3,14 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <title>ASIDUM — Modular Underwater Systems</title>
   <meta name="description" content="ASIDUM engineers modular ROV platforms designed for real-world underwater research, inspection, and scalable production." />
+
+  <!-- Favicons (use absolute paths to avoid folder/path issues) -->
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/svg+xml" href="/Logo1.svg" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
   <style>
     :root{
@@ -17,39 +23,76 @@
       --accent2:#7ee0c3;
       --max:1100px;
       --radius:18px;
+      --headerH:64px; /* used to offset in-page anchors */
     }
     *{box-sizing:border-box}
     html,body{height:100%}
+    html{scroll-behavior:smooth}
     body{
       margin:0;
       font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-      background: radial-gradient(900px 500px at 20% 0%, rgba(143,177,255,.14), transparent 60%),
-                  radial-gradient(900px 500px at 80% 10%, rgba(126,224,195,.10), transparent 60%),
-                  var(--bg);
+      background:
+        radial-gradient(900px 500px at 20% 0%, rgba(143,177,255,.14), transparent 60%),
+        radial-gradient(900px 500px at 80% 10%, rgba(126,224,195,.10), transparent 60%),
+        var(--bg);
       color:var(--fg);
     }
     a{color:inherit}
     .wrap{max-width:var(--max); margin:0 auto; padding:0 20px}
+
+    /* Sticky header */
     header{
-      position:sticky; top:0;
+      position:sticky;
+      top:0;
+      z-index:50;
       backdrop-filter:saturate(120%) blur(10px);
       background:rgba(15,18,24,.72);
       border-bottom:1px solid var(--line);
-      z-index:50;
     }
     .nav{
-      display:flex; align-items:center; justify-content:space-between;
-      padding:14px 0;
+      height:var(--headerH);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
       gap:16px;
     }
+
+    /* Brand with logo */
     .brand{
-      display:flex; align-items:baseline; gap:10px;
+      display:flex;
+      align-items:center;
+      gap:12px;
       text-decoration:none;
-      letter-spacing:.08em;
+      min-width:220px;
     }
-    .brand b{font-size:14px}
-    .brand span{font-size:12px; color:var(--muted); letter-spacing:.04em}
-    .navlinks{display:flex; gap:14px; flex-wrap:wrap; justify-content:flex-end}
+    .brand img{
+      width:28px;
+      height:28px;
+      display:block;
+    }
+    .brand .name{
+      display:flex;
+      gap:10px;
+      align-items:baseline;
+      white-space:nowrap;
+    }
+    .brand .name b{
+      font-size:14px;
+      letter-spacing:.10em;
+    }
+    .brand .name span{
+      font-size:12px;
+      color:var(--muted);
+      letter-spacing:.04em;
+    }
+
+    .navlinks{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+      align-items:center;
+    }
     .navlinks a{
       text-decoration:none;
       color:var(--muted);
@@ -58,13 +101,30 @@
       border-radius:999px;
       border:1px solid transparent;
     }
-    .navlinks a:hover{color:var(--fg); border-color:var(--line); background:rgba(255,255,255,.03)}
+    .navlinks a:hover{
+      color:var(--fg);
+      border-color:var(--line);
+      background:rgba(255,255,255,.03);
+    }
+
+    /* Content sections */
+    main{padding-bottom:40px}
+    section{
+      padding:44px 0;
+      border-top:1px solid var(--line);
+      scroll-margin-top: calc(var(--headerH) + 14px); /* prevents header covering anchors */
+    }
+
     .hero{
       padding:72px 0 32px;
+      border-top:none;
     }
     .kicker{
-      display:inline-flex; gap:10px; align-items:center;
-      font-size:12px; color:var(--muted);
+      display:inline-flex;
+      gap:10px;
+      align-items:center;
+      font-size:12px;
+      color:var(--muted);
       border:1px solid var(--line);
       background:rgba(255,255,255,.02);
       padding:8px 12px;
@@ -82,12 +142,17 @@
       color:var(--muted);
       font-size:18px;
     }
+
     .cta{
-      display:flex; gap:12px; flex-wrap:wrap;
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
       margin-top:22px;
     }
     .btn{
-      display:inline-flex; align-items:center; justify-content:center;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
       gap:10px;
       padding:12px 16px;
       border-radius:999px;
@@ -103,10 +168,7 @@
     }
     .btn:hover{background:rgba(255,255,255,.06)}
     .btn.primary:hover{background:rgba(143,177,255,.14)}
-    section{
-      padding:44px 0;
-      border-top:1px solid var(--line);
-    }
+
     .section-title{
       margin:0 0 8px;
       font-size:14px;
@@ -120,34 +182,25 @@
       line-height:1.25;
       letter-spacing:-.01em;
     }
-    .grid{
-      display:grid;
-      grid-template-columns: 1fr;
-      gap:16px;
-    }
+
+    .grid{display:grid; grid-template-columns:1fr; gap:16px}
     @media (min-width: 860px){
       .grid.two{grid-template-columns: 1.15fr .85fr}
       .grid.cards{grid-template-columns: repeat(2, 1fr)}
       h1{font-size:54px}
     }
+
     .panel{
       background:rgba(255,255,255,.02);
       border:1px solid var(--line);
       border-radius:var(--radius);
       padding:18px;
     }
-    .panel h3{
-      margin:0 0 10px;
-      font-size:16px;
-      letter-spacing:-.01em;
-    }
+    .panel h3{margin:0 0 10px; font-size:16px; letter-spacing:-.01em}
     .panel p{margin:0; color:var(--muted)}
-    ul.clean{
-      margin:0;
-      padding-left:18px;
-      color:var(--muted);
-    }
+    ul.clean{margin:0; padding-left:18px; color:var(--muted)}
     ul.clean li{margin:8px 0}
+
     .callout{
       border:1px dashed rgba(143,177,255,.45);
       background:rgba(143,177,255,.06);
@@ -156,30 +209,47 @@
       color:var(--muted);
     }
     .callout b{color:var(--fg)}
+
+    .divider{height:1px; background:var(--line); margin:14px 0}
+    .mono{font-family: ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; font-size:13px; color:var(--muted)}
     .foot{
       padding:28px 0 48px;
       color:var(--muted);
       font-size:13px;
       border-top:1px solid var(--line);
     }
-    .mono{
-      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-      font-size:13px;
-      color:var(--muted);
-    }
-    .divider{
-      height:1px; background:var(--line); margin:14px 0;
+
+    /* Mobile: allow horizontal scroll for nav instead of wrapping too much */
+    @media (max-width: 720px){
+      .nav{gap:10px}
+      .brand{min-width:auto}
+      .brand .name span{display:none}
+      .navlinks{
+        flex-wrap:nowrap;
+        overflow:auto;
+        -webkit-overflow-scrolling:touch;
+        max-width:60vw;
+        padding-bottom:2px;
+      }
+      .navlinks a{white-space:nowrap}
     }
   </style>
 </head>
 
 <body>
+  <!-- Sticky header with buttons always visible on scroll -->
   <header>
     <div class="wrap">
       <div class="nav">
         <a class="brand" href="#top" aria-label="ASIDUM Home">
-          <b>ASIDUM</b><span>Modular Underwater Systems</span>
+          <!-- Logo from previous version; MUST be available at /Logo1.svg -->
+          <img src="/Logo1.svg" alt="ASIDUM logo" draggable="false" />
+          <div class="name">
+            <b>ASIDUM</b>
+            <span>Modular Underwater Systems</span>
+          </div>
         </a>
+
         <nav class="navlinks" aria-label="Primary">
           <a href="#what">What we build</a>
           <a href="#approach">Engineering approach</a>
@@ -194,7 +264,7 @@
   <main id="top">
     <!-- HERO -->
     <div class="wrap">
-      <section class="hero" style="border-top:none;">
+      <section class="hero">
         <div class="kicker">Underwater robotics • Modular systems • Production-ready design</div>
         <h1>ASIDUM<br/>Modular Underwater Systems</h1>
         <p class="sub">
@@ -228,14 +298,13 @@
             </div>
           </div>
           <div class="panel">
-            <h3>Notes</h3>
-            <p>
-              The site emphasizes engineering maturity and system architecture to support
-              product development, partnerships, and investment discussions.
-            </p>
+            <h3>Tagline</h3>
+            <p>Optional place to keep your original slogan:</p>
             <div class="divider"></div>
-            <p class="mono">
-              Tip: Add a single system diagram or render here (one strong visual beats many decorative images).
+            <p class="mono">Just explore. Simply.</p>
+            <div class="divider"></div>
+            <p>
+              If you prefer to keep the site strictly product-focused, you can remove this panel.
             </p>
           </div>
         </div>
@@ -338,23 +407,23 @@
           </div>
 
           <div class="panel">
-            <h3>Visual placeholder</h3>
+            <h3>Insert your diagram / render</h3>
             <p>
-              Insert a single system diagram or render here. Suggested content:
-              block diagram (modules + interfaces), exploded view, or a clean concept render.
+              Use one strong visual (block diagram, exploded-view logic, or a clean concept render).
+              Keep labels minimal.
             </p>
             <div class="divider"></div>
 
             <!-- Replace this placeholder with your image -->
             <div class="panel" style="padding:14px; background:rgba(0,0,0,.18)">
               <div class="mono">
-                Placeholder box for image / diagram
-                <br/>Recommended: 1200×800 (or similar), dark-friendly, minimal labels.
+                Placeholder for image / diagram<br/>
+                Recommended: 1200×800 (or similar), dark-friendly, minimal labels.
               </div>
             </div>
 
-            <!-- Example image tag (uncomment and set src):
-            <img src="your-image.png" alt="ASIDUM system architecture" style="width:100%; border-radius:14px; border:1px solid var(--line); margin-top:12px;" />
+            <!-- Example (uncomment & set src):
+            <img src="/architecture.png" alt="ASIDUM system architecture" style="width:100%; border-radius:14px; border:1px solid var(--line); margin-top:12px;" />
             -->
           </div>
         </div>
