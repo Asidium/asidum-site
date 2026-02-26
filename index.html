@@ -7,7 +7,6 @@
   <title>ASIDUM — Modular Underwater Systems</title>
   <meta name="description" content="Just explore. Simply. ASIDUM engineers modular ROV platforms designed for real-world underwater research, inspection, and scalable production." />
 
-  <!-- Favicons (absolute paths) -->
   <link rel="icon" href="/favicon.ico" sizes="any" />
   <link rel="icon" type="image/svg+xml" href="/Logo1.svg" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
@@ -24,7 +23,7 @@
 
       --max:1120px;
       --radius:18px;
-      --headerH:74px;
+      --headerH:84px; /* a bit taller to fit tagline in header */
     }
 
     *{box-sizing:border-box}
@@ -36,13 +35,12 @@
       background:var(--bg);
       color:var(--fg);
       padding-top:var(--headerH);
-      overflow-x:hidden; /* prevent any accidental horizontal cutoffs */
+      overflow-x:hidden;
     }
-
     a{color:inherit}
     .wrap{max-width:var(--max); margin:0 auto; padding:0 20px}
 
-    /* ===== Header ===== */
+    /* ===== Header (fixed) ===== */
     header{
       position:fixed;
       top:0; left:0; right:0;
@@ -61,12 +59,13 @@
       gap:18px;
     }
 
+    /* Brand block: two lines (line1 brand, line2 tagline) */
     .brand{
       display:flex;
       align-items:center;
-      gap:14px;
+      gap:12px;
       text-decoration:none;
-      min-width:260px;
+      min-width:320px;
     }
     .brand img{
       width:52px;
@@ -75,21 +74,38 @@
       opacity:.95;
       flex:0 0 auto;
     }
-    .brand .name{
+    .brandtext{
+      display:flex;
+      flex-direction:column;
+      line-height:1.1;
+      gap:6px;
+      min-width:0;
+    }
+    .brandline{
       display:flex;
       gap:10px;
       align-items:baseline;
       white-space:nowrap;
+      min-width:0;
     }
-    .brand .name b{
+    .brandline .brandword{
       font-size:15px;
       letter-spacing:.10em;
+      font-weight:800;
     }
-    .brand .name span{
+    .brandline .descriptor{
+      font-size:12px;
+      letter-spacing:.04em;
+      font-weight:400;
+      color:var(--muted);
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+    .brandtag{
       font-size:12px;
       color:var(--muted);
-      letter-spacing:.04em;
-      font-weight:400; /* not bold */
+      letter-spacing:.02em;
+      white-space:nowrap;
     }
 
     .navlinks{
@@ -119,7 +135,6 @@
       padding:46px 0;
       border-top:1px solid var(--line);
       scroll-margin-top: calc(var(--headerH) + 18px);
-      background:transparent;
     }
 
     /* ===== Hero ===== */
@@ -133,9 +148,8 @@
       border-radius:24px;
       box-shadow:0 14px 40px rgba(17,24,39,.08);
       padding:34px 28px;
-      overflow:hidden; /* avoid visual "overlaps" */
+      overflow:hidden;
     }
-
     .kicker{
       display:inline-flex;
       gap:10px;
@@ -148,58 +162,55 @@
       border-radius:999px;
     }
 
-    h1{
-      margin:18px 0 8px;
-      font-size:52px;
-      line-height:1.05;
-      letter-spacing:-.02em;
-    }
-    .hero-title{
+    /* Hero brand line + tagline below */
+    .hero-brand{
       display:flex;
-      align-items:flex-start; /* aligns better with text block */
+      align-items:flex-start;
       gap:18px;
-      flex-wrap:nowrap;
+      margin-top:18px;
     }
-    .hero-title img{
-      width:110px;
-      height:110px;
-      opacity:.95;
+    .hero-brand img{
+      width:120px;
+      height:120px;
       display:block;
+      opacity:.95;
       flex:0 0 auto;
-      margin-top:2px;
     }
-    /* Title + tagline in a single text column */
-    .hero-text{
+    .hero-brandtext{
       display:flex;
       flex-direction:column;
-      gap:6px;
+      gap:10px;
       min-width:0;
     }
-    .hero-text .title-line{
+    .hero-brandline{
       display:flex;
-      gap:12px;
+      gap:14px;
       align-items:baseline;
       flex-wrap:wrap;
     }
-    .hero-text .title-line .brandword{
-      font-weight:800;
+    .hero-brandline .brandword{
+      font-size:56px;
+      line-height:1.02;
       letter-spacing:-.02em;
+      font-weight:900;
     }
-    .hero-text .title-line .descriptor{
-      font-weight:400;  /* not bold */
+    .hero-brandline .descriptor{
+      font-size:44px;
+      line-height:1.02;
+      letter-spacing:-.02em;
+      font-weight:400; /* not bold */
       color:var(--fg);
       opacity:.95;
     }
-
-    /* Tagline attached under title (hero) */
-    .tagline{
-      color:var(--muted);
+    .hero-tag{
       font-size:14px;
+      color:var(--muted);
       letter-spacing:.02em;
+      margin-top:-2px;
     }
 
     .sub{
-      margin:10px 0 0;
+      margin:12px 0 0;
       max-width:920px;
       color:var(--muted);
       font-size:18px;
@@ -232,7 +243,6 @@
     }
     .btn.primary:hover{background:rgba(43,108,176,.14)}
 
-    /* ===== Typography ===== */
     .section-title{
       margin:0 0 10px;
       font-size:13px;
@@ -247,12 +257,11 @@
       letter-spacing:-.01em;
     }
 
-    /* ===== Grids + Equal-height columns ===== */
     .grid{
       display:grid;
       grid-template-columns:1fr;
       gap:16px;
-      align-items:stretch; /* ensures equal-height cards per row */
+      align-items:stretch;
     }
     @media (min-width: 900px){
       .grid.two{grid-template-columns: 1.15fr .85fr}
@@ -265,7 +274,7 @@
       border-radius:var(--radius);
       padding:18px;
       box-shadow:0 10px 26px rgba(17,24,39,.06);
-      min-height:100%; /* equalize within grid */
+      min-height:100%;
     }
     .panel h3{margin:0 0 10px; font-size:16px; letter-spacing:-.01em}
     .panel p{margin:0; color:var(--muted)}
@@ -303,7 +312,6 @@
       display:inline-block;
     }
 
-    /* Placeholder blocks that look intentional */
     .placeholder{
       border:1px dashed rgba(17,24,39,.18);
       background:rgba(17,24,39,.02);
@@ -334,16 +342,18 @@
       border-top:1px solid var(--line);
     }
 
-    /* ===== Mobile tuning ===== */
+    /* ===== Mobile ===== */
     @media (max-width: 980px){
-      .hero-title{flex-wrap:wrap}
-      .hero-title img{width:86px; height:86px}
-      h1{font-size:40px}
+      .hero-brand{flex-wrap:wrap}
+      .hero-brand img{width:90px; height:90px}
+      .hero-brandline .brandword{font-size:44px}
+      .hero-brandline .descriptor{font-size:34px}
     }
     @media (max-width: 720px){
+      :root{--headerH:78px;}
       .nav{gap:10px}
       .brand{min-width:auto}
-      .brand .name span{display:none}
+      .brandline .descriptor{display:none} /* keep header compact */
       .navlinks{
         flex-wrap:nowrap;
         overflow:auto;
@@ -353,6 +363,7 @@
       }
       .navlinks a{white-space:nowrap}
       .brand img{width:44px; height:44px}
+      .brandtag{display:none} /* optional: hide tagline in header on very small screens */
     }
   </style>
 </head>
@@ -363,9 +374,14 @@
       <div class="nav">
         <a class="brand" href="#top" aria-label="ASIDUM Home">
           <img src="/Logo1.svg" alt="ASIDUM logo" draggable="false" />
-          <div class="name">
-            <b>ASIDUM</b>
-            <span>Modular Underwater Systems</span>
+          <div class="brandtext">
+            <!-- one line -->
+            <div class="brandline">
+              <span class="brandword">ASIDUM</span>
+              <span class="descriptor">Modular Underwater Systems</span>
+            </div>
+            <!-- tagline under it -->
+            <div class="brandtag">Just explore. Simply.</div>
           </div>
         </a>
 
@@ -387,17 +403,16 @@
         <div class="hero-card">
           <div class="kicker">Underwater robotics • Modular systems • Production-ready design</div>
 
-          <div class="hero-title">
+          <div class="hero-brand">
             <img src="/Logo1.svg" alt="ASIDUM" draggable="false" />
-            <div class="hero-text">
-              <h1 style="margin:0;">
-                <span class="title-line">
-                  <span class="brandword">ASIDUM</span>
-                  <span class="descriptor">Modular Underwater Systems</span>
-                </span>
-              </h1>
-              <!-- Tagline moved directly under the title (Hero) -->
-              <div class="tagline">Just explore. Simply.</div>
+            <div class="hero-brandtext">
+              <!-- one line -->
+              <div class="hero-brandline">
+                <span class="brandword">ASIDUM</span>
+                <span class="descriptor">Modular Underwater Systems</span>
+              </div>
+              <!-- tagline under it -->
+              <div class="hero-tag">Just explore. Simply.</div>
             </div>
           </div>
 
@@ -435,16 +450,11 @@
           </div>
 
           <div class="panel">
-            <!-- Tagline moved here too (second place) -->
-            <h3>Tagline</h3>
-            <div class="tagline" style="margin-top:0;">Just explore. Simply.</div>
-
+            <h3>Architecture diagram in progress</h3>
             <div class="divider"></div>
-
-            <!-- Better, intentional "under construction" placeholder -->
             <div class="placeholder">
               <div class="placeholder-title">
-                <b>Architecture diagram in progress</b>
+                <b>High-level module map (v1)</b>
                 <span class="pill"><span class="dot"></span> Work in progress</span>
               </div>
               <p>
@@ -453,7 +463,7 @@
               <ul>
                 <li>Propulsion / Power / Control / Payload layers</li>
                 <li>Interface boundaries and upgrade paths</li>
-                <li>High-level block diagram (v1)</li>
+                <li>Example configuration options</li>
               </ul>
             </div>
           </div>
@@ -559,19 +569,17 @@
           <div class="panel">
             <h3>Insert your diagram / render</h3>
             <p>
-              One strong visual will go here: a block diagram, exploded-view logic, or a clean concept render.
-              Labels will remain minimal.
+              One strong visual will go here: a block diagram, exploded-view logic, or a clean concept render. Labels will remain minimal.
             </p>
             <div class="divider"></div>
 
-            <!-- Harmonized "work in progress" placeholder for the visual -->
             <div class="placeholder">
               <div class="placeholder-title">
                 <b>System diagram placeholder</b>
                 <span class="pill"><span class="dot"></span> In development</span>
               </div>
               <p>
-                We are preparing an architecture overview image. The final graphic will show module boundaries and interfaces.
+                The final graphic will show module boundaries and interfaces. This section is being refined.
               </p>
               <ul>
                 <li>High-level blocks (no internal details)</li>
@@ -580,7 +588,7 @@
               </ul>
             </div>
 
-            <!-- Later: replace the placeholder with an image
+            <!-- Later:
             <img src="/architecture.png" alt="ASIDUM system architecture" style="width:100%; border-radius:14px; border:1px solid var(--line); margin-top:12px;" />
             -->
           </div>
