@@ -129,6 +129,42 @@
       background:rgba(17,24,39,.04);
     }
 
+     /* ===== EN/TR ===== */
+    .lang{
+  display:inline-flex;
+  align-items:center;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.65);
+  border-radius:999px;
+  padding:4px;
+  gap:4px;
+  white-space:nowrap;
+}
+
+.langbtn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-width:40px;
+  height:32px;
+  padding:0 10px;
+  border-radius:999px;
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:.10em;
+  color:var(--muted);
+}
+
+.langbtn:hover{
+  background:rgba(17,24,39,.04);
+  color:var(--fg);
+}
+
+.langbtn.is-active{
+  background:rgba(43,108,176,.12);
+  border:1px solid rgba(43,108,176,.30);
+  color:var(--fg);
+}
     /* ===== Sections ===== */
     main{padding-bottom:44px}
     section{
@@ -392,6 +428,10 @@
           <a href="#architecture">Architecture</a>
           <a href="#partner">Partnership</a>
         </nav>
+        <div class="lang" aria-label="Language switch">
+          <a class="langbtn is-active" href="/" hreflang="en" lang="en">EN</a>
+        <a class="langbtn" href="/tr/" hreflang="tr" lang="tr">TR</a>
+        </div>
       </div>
     </div>
   </header>
