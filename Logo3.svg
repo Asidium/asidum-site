@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="567.08795mm"
+   height="151.17259mm"
+   viewBox="0 0 567.08796 151.17259"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4.2 (f4327f4, 2025-05-13)"
+   sodipodi:docname="Logo3.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     inkscape:zoom="0.35945918"
+     inkscape:cx="984.81281"
+     inkscape:cy="588.38392"
+     inkscape:window-width="1920"
+     inkscape:window-height="1009"
+     inkscape:window-x="1912"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs1">
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#swatch13"
+       id="linearGradient14"
+       x1="24.657837"
+       y1="148.07037"
+       x2="174.83203"
+       y2="148.07037"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(-215.95159,13.24093)" />
+    <linearGradient
+       id="swatch13"
+       inkscape:swatch="solid">
+      <stop
+         style="stop-color:#006aa4;stop-opacity:1;"
+         offset="0"
+         id="stop14" />
+    </linearGradient>
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(191.29376,-85.724999)">
+    <path
+       style="fill:url(#linearGradient14);fill-opacity:1"
+       d="m -123.83629,236.49505 c -51.91751,-5.43788 -82.7227,-61.38461 -59.73554,-108.48849 29.62828,-60.712452 114.26511,-54.779109 138.09673,9.68107 18.50039,50.04015 -24.63807,104.43442 -78.36119,98.80742 z m 11.16491,-22.36295 c 18.20426,-1.24372 27.43946,-9.10309 21.5257,-18.31889 -3.05858,-4.76638 -8.05257,-6.3777 -17.36497,-5.60285 -18.56999,1.54513 -31.97106,-7.65118 -34.57851,-23.72903 -4.05531,-25.00558 23.51942,-42.40562 44.70528,-28.20966 8.45683,5.66665 12.10451,13.29191 12.5559,26.24738 0.37507,10.76492 2.60847,14.50879 9.40467,15.76513 16.10451,2.97709 19.60069,-25.90945 5.69834,-47.08156 -26.45243,-40.28483 -87.03695,-27.99623 -96.1178,19.49595 -5.66826,29.64458 17.10306,59.22858 47.26587,61.40679 1.61522,0.11665 2.9963,0.22732 3.06906,0.24594 0.0728,0.0186 1.79917,-0.08 3.83646,-0.2192 z"
+       id="path1" />
+    <text
+       xml:space="preserve"
+       style="font-size:88.1944px;line-height:0;text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;white-space:pre;inline-size:515.854;fill:#006aa4;stroke:#000000;stroke-width:0.264583;stroke-linecap:round;stroke-linejoin:bevel;paint-order:fill markers stroke"
+       x="193.5835"
+       y="143.51381"
+       id="text1"
+       transform="translate(-217.42371,20.601525)"><tspan
+         x="193.5835"
+         y="143.51381"
+         id="tspan5"><tspan
+           style="font-weight:bold;-inkscape-font-specification:'sans-serif Bold';fill:#000304"
+           id="tspan1">ASIDUM</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:35.2778px;line-height:0;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#000304;fill-opacity:1;stroke:#000000;stroke-width:0.264583;stroke-linecap:round;stroke-linejoin:bevel;paint-order:fill markers stroke"
+       x="-6.53266"
+       y="220.42389"
+       id="text2"><tspan
+         sodipodi:role="line"
+         id="tspan2"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:35.2778px;font-family:sans-serif;-inkscape-font-specification:sans-serif;stroke-width:0.264583"
+         x="-6.53266"
+         y="220.42389">Just explore. Simply.</tspan></text>
+  </g>
+</svg>
