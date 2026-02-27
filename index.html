@@ -7,8 +7,8 @@
   <title>Modular Underwater Systems</title>
   <meta name="description" content="Just explore. Simply. ASIDUM engineers modular ROV platforms designed for real-world underwater research, inspection, and scalable production." />
 
-  <link rel="icon" href="/favicon.ico" sizes="any" />
-  <link rel="icon" type="image/svg+xml" href="/Logo3.svg" />
+  <link rel="icon" href="/Logo1.svg" sizes="any" />
+  <link rel="icon" type="image/svg+xml" href="/Logo1.svg" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
   <style>
@@ -23,7 +23,7 @@
 
       --max:1120px;
       --radius:18px;
-      --headerH:84px; /* a bit taller to fit tagline in header */
+      --headerH:96px; /* a bit taller to fit tagline in header */
     }
 
     *{box-sizing:border-box}
@@ -98,12 +98,13 @@
       font-weight:800;
     }
     .brandline .descriptor{
-      font-size:12px;
-      letter-spacing:.04em;
-      font-weight:400;
-      color:var(--muted);
-      overflow:hidden;
-      text-overflow:ellipsis;
+        font-size:18px;          /* было 12px */
+        letter-spacing:.02em;    /* было .04em */
+        font-weight:700;         /* было 400 */
+        color:var(--fg);         /* было var(--muted) */
+        opacity:.92;
+        overflow:hidden;
+        text-overflow:ellipsis;
     }
     .brandtag{
       font-size:12px;
@@ -233,10 +234,10 @@
       font-weight:900;
     }
     .hero-brandline .descriptor{
-      font-size:44px;
+      font-size:54px;          /* было 44px */
       line-height:1.02;
       letter-spacing:-.02em;
-      font-weight:400;
+      font-weight:700;         /* было 400 */
       color:var(--fg);
       opacity:.95;
     }
@@ -385,7 +386,7 @@
       .hero-brand{flex-wrap:wrap}
       .hero-brand img{width:90px; height:90px}
       .hero-brandline .brandword{font-size:44px}
-      .hero-brandline .descriptor{font-size:34px}
+      .hero-brandline .descriptor{font-size:40px}
     }
     @media (max-width: 720px){
       :root{--headerH:78px;}
