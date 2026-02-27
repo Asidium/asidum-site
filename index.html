@@ -7,6 +7,7 @@
   <title>Modular Underwater Systems</title>
   <meta name="description" content="Just explore. Simply. ASIDUM engineers modular ROV platforms designed for real-world underwater research, inspection, and scalable production." />
 
+  <!-- Tab icon -->
   <link rel="icon" href="/Logo1.svg" sizes="any" />
   <link rel="icon" type="image/svg+xml" href="/Logo1.svg" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
@@ -23,7 +24,7 @@
 
       --max:1120px;
       --radius:18px;
-      --headerH:84px; /* a bit taller to fit tagline in header */
+      --headerH:98px; /* taller header to fit stacked brand text */
     }
 
     *{box-sizing:border-box}
@@ -59,60 +60,61 @@
       gap:18px;
     }
 
-    /* Brand block */
+    /* Brand: logo + stacked text (subtitle under logo wordmark) */
     .brand{
       display:flex;
       align-items:center;
-      gap:12px;
+      gap:14px;
       text-decoration:none;
-      min-width:320px;
+      min-width:360px;
     }
 
-    /* ✅ LOGO SIZE: scalable with font (proportional) */
+    /* Header logo bigger (circled one) */
     .brand img{
-      height:2.8em;   /* tune 2.2–3.0em */
+      height:3.2em;   /* increased */
       width:auto;
       display:block;
-      opacity:.95;
+      opacity:.98;
       flex:0 0 auto;
-      margin-top:-.05em; /* small baseline alignment tweak */
     }
 
     .brandtext{
       display:flex;
       flex-direction:column;
-      line-height:1.1;
+      line-height:1.05;
       gap:6px;
       min-width:0;
     }
+
+    /* Put "Modular Underwater Systems" under the main brand line */
     .brandline{
       display:flex;
-      gap:10px;
       align-items:baseline;
+      gap:10px;
       white-space:nowrap;
       min-width:0;
     }
+
+    /* optional: show ASIDUM word in header if you ever add it back */
     .brandline .brandword{
-      font-size:15px;
+      font-size:16px;
       letter-spacing:.10em;
-      font-weight:800;
-    }
-    .brandline .descriptor{
-        font-size:12px;          /* было 12px */
-        letter-spacing:.04em;    /* было .04em */
-        font-weight:400;         /* было 400 */
-        color:var(--muted);         /* было var(--muted) */
-        opacity:.92;
-        overflow:hidden;
-        text-overflow:ellipsis;
-    }
-    .brandtag{
-      font-size:12px;
-      color:var(--muted);
-      letter-spacing:.02em;
-      white-space:nowrap;
+      font-weight:900;
     }
 
+    /* Subtitle UNDER the logo line */
+    .brandsub{
+      font-size:18px;       /* bigger and aligned with nav feel */
+      font-weight:700;
+      letter-spacing:.01em;
+      color:var(--fg);
+      opacity:.92;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+
+    /* Nav links: align visually with subtitle */
     .navlinks{
       display:flex;
       gap:10px;
@@ -123,10 +125,12 @@
     .navlinks a{
       text-decoration:none;
       color:var(--muted);
-      font-size:13px;
-      padding:8px 10px;
+      font-size:16px;       /* increased */
+      font-weight:600;      /* increased */
+      padding:10px 12px;    /* slightly larger hit area */
       border-radius:999px;
       border:1px solid transparent;
+      line-height:1;
     }
     .navlinks a:hover{
       color:var(--fg);
@@ -144,17 +148,18 @@
       padding:4px;
       gap:4px;
       white-space:nowrap;
+      flex:0 0 auto;
     }
     .langbtn{
       display:inline-flex;
       align-items:center;
       justify-content:center;
       min-width:40px;
-      height:32px;
+      height:34px;
       padding:0 10px;
       border-radius:999px;
       font-size:12px;
-      font-weight:700;
+      font-weight:800;
       letter-spacing:.10em;
       color:var(--muted);
     }
@@ -205,16 +210,19 @@
     .hero-brand{
       display:flex;
       align-items:flex-start;
-      gap:18px;
+      gap:22px;
       margin-top:18px;
     }
+
+    /* Bigger hero logo (circled block) */
     .hero-brand img{
-      width:120px;
-      height:120px;
+      width:150px;   /* increased */
+      height:150px;  /* increased */
       display:block;
-      opacity:.95;
+      opacity:.98;
       flex:0 0 auto;
     }
+
     .hero-brandtext{
       display:flex;
       flex-direction:column;
@@ -227,25 +235,13 @@
       align-items:baseline;
       flex-wrap:wrap;
     }
-    .hero-brandline .brandword{
-      font-size:56px;
-      line-height:1.02;
-      letter-spacing:-.02em;
-      font-weight:900;
-    }
     .hero-brandline .descriptor{
-      font-size:44px;          /* было 44px */
+      font-size:56px;          /* increased */
       line-height:1.02;
       letter-spacing:-.02em;
-      font-weight:400;         /* было 400 */
+      font-weight:500;
       color:var(--fg);
-      opacity:.95;
-    }
-    .hero-tag{
-      font-size:14px;
-      color:var(--muted);
-      letter-spacing:.02em;
-      margin-top:-2px;
+      opacity:.96;
     }
 
     .sub{
@@ -383,29 +379,32 @@
 
     /* ===== Mobile ===== */
     @media (max-width: 980px){
+      :root{--headerH:92px;}
+      .brand{min-width:auto}
+      .brand img{height:3.0em}
+      .brandsub{font-size:16px}
+      .navlinks a{font-size:14px; padding:9px 10px}
+
       .hero-brand{flex-wrap:wrap}
-      .hero-brand img{width:90px; height:90px}
-      .hero-brandline .brandword{font-size:44px}
-      .hero-brandline .descriptor{font-size:40px}
+      .hero-brand img{width:120px; height:120px}
+      .hero-brandline .descriptor{font-size:44px}
     }
     @media (max-width: 720px){
-      :root{--headerH:78px;}
+      :root{--headerH:84px;}
       .nav{gap:10px}
-      .brand{min-width:auto}
-      .brandline .descriptor{display:none}
       .navlinks{
         flex-wrap:nowrap;
         overflow:auto;
         -webkit-overflow-scrolling:touch;
-        max-width:60vw;
+        max-width:62vw;
         padding-bottom:2px;
       }
       .navlinks a{white-space:nowrap}
 
-      /* ✅ mobile logo uses em as well */
-      .brand img{height:2.3em; width:auto;}
+      .brandsub{display:none} /* keep header compact */
+      .brand img{height:2.6em}
 
-      .brandtag{display:none}
+      .lang{display:none} /* optional: hide switcher on very small screens */
     }
   </style>
 </head>
@@ -417,9 +416,8 @@
         <a class="brand" href="#top" aria-label="ASIDUM Home">
           <img src="/Logo3.svg" alt="ASIDUM logo" draggable="false" />
           <div class="brandtext">
-            <div class="brandline">
-              <span class="descriptor">Modular Underwater Systems</span>
-            </div>
+            <!-- Subtitle UNDER logo/wordmark area -->
+            <div class="brandsub">Modular Underwater Systems</div>
           </div>
         </a>
 
