@@ -8,7 +8,7 @@
   <meta name="description" content="Just explore. Simply. ASIDUM engineers modular ROV platforms designed for real-world underwater research, inspection, and scalable production." />
 
   <link rel="icon" href="/favicon.ico" sizes="any" />
-  <link rel="icon" type="image/svg+xml" href="/Logo1.svg" />
+  <link rel="icon" type="image/svg+xml" href="/Logo3.svg" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
   <style>
@@ -23,7 +23,7 @@
 
       --max:1120px;
       --radius:18px;
-      --headerH:84px; /* a bit taller to fit tagline in header */
+      --headerH:84px;
     }
 
     *{box-sizing:border-box}
@@ -67,17 +67,14 @@
       text-decoration:none;
       min-width:320px;
     }
-
-    /* ✅  SIZE: scalable with font (proportional) */
     .brand img{
-      height:2.8em;   /* tune 2.2–3.0em */
+      height:2.8em;
       width:auto;
       display:block;
       opacity:.95;
       flex:0 0 auto;
-      margin-top:-.05em; /* small baseline alignment tweak */
+      margin-top:-.05em;
     }
-
     .brandtext{
       display:flex;
       flex-direction:column;
@@ -200,16 +197,17 @@
       border-radius:999px;
     }
 
-    /* Hero brand */
+    /* ✅ Hero brand: align logo + title on one line */
     .hero-brand{
       display:flex;
-      align-items:flex-start;
-      gap:18px;
+      align-items:center;     /* was flex-start */
+      gap:22px;
       margin-top:18px;
     }
+    /* ✅ Logo +20% (250 -> 300) */
     .hero-brand img{
-      width:250px;
-      height:250px;
+      width:300px;
+      height:300px;
       display:block;
       opacity:.95;
       flex:0 0 auto;
@@ -217,38 +215,27 @@
     .hero-brandtext{
       display:flex;
       flex-direction:column;
-      gap:10px;
+      justify-content:center; /* ensures vertical centering relative to image */
       min-width:0;
     }
     .hero-brandline{
       display:flex;
+      align-items:center;     /* align baseline issues for different fonts */
       gap:14px;
-      align-items:baseline;
-      flex-wrap:wrap;
-    }
-    .hero-brandline .brandword{
-      font-size:56px;
-      line-height:1.02;
-      letter-spacing:-.02em;
-      font-weight:900;
+      flex-wrap:nowrap;       /* keep in one line */
     }
     .hero-brandline .descriptor{
-      font-size:44px;
-      line-height:1.02;
+      font-size:64px;         /* adjust if needed */
+      line-height:1.0;
       letter-spacing:-.02em;
       font-weight:400;
       color:var(--fg);
       opacity:.95;
-    }
-    .hero-tag{
-      font-size:14px;
-      color:var(--muted);
-      letter-spacing:.02em;
-      margin-top:-2px;
+      white-space:nowrap;
     }
 
     .sub{
-      margin:12px 0 0;
+      margin:18px 0 0;
       max-width:920px;
       color:var(--muted);
       font-size:18px;
@@ -383,9 +370,9 @@
     /* ===== Mobile ===== */
     @media (max-width: 980px){
       .hero-brand{flex-wrap:wrap}
-      .hero-brand img{width:150px; height:150px}
-      .hero-brandline .brandword{font-size:44px}
-      .hero-brandline .descriptor{font-size:34px}
+      .hero-brand img{width:180px; height:180px} /* scaled down for mobile */
+      .hero-brandline{flex-wrap:wrap}
+      .hero-brandline .descriptor{font-size:44px}
     }
     @media (max-width: 720px){
       :root{--headerH:78px;}
@@ -400,10 +387,7 @@
         padding-bottom:2px;
       }
       .navlinks a{white-space:nowrap}
-
-      /* ✅ mobile  uses em as well */
       .brand img{height:2.3em; width:auto;}
-
       .brandtag{display:none}
     }
   </style>
@@ -414,7 +398,7 @@
     <div class="wrap">
       <div class="nav">
         <a class="brand" href="#top" aria-label="ASIDUM Home">
-          <img src="/3.svg" alt="ASIDUM logo" draggable="false" />
+          <img src="/Logo3.svg" alt="ASIDUM logo" draggable="false" />
           <div class="brandtext">
             <div class="brandline">
               <span class="descriptor">Modular Underwater Systems</span>
