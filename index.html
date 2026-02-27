@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <title> Modular Underwater Systems</title>
+  <title>Modular Underwater Systems</title>
   <meta name="description" content="Just explore. Simply. ASIDUM engineers modular ROV platforms designed for real-world underwater research, inspection, and scalable production." />
 
   <link rel="icon" href="/favicon.ico" sizes="any" />
@@ -59,7 +59,7 @@
       gap:18px;
     }
 
-    /* Brand block: two lines (line1 brand, line2 tagline) */
+    /* Brand block */
     .brand{
       display:flex;
       align-items:center;
@@ -67,13 +67,17 @@
       text-decoration:none;
       min-width:320px;
     }
+
+    /* ✅ LOGO SIZE: scalable with font (proportional) */
     .brand img{
-      width:52px;
-      height:52px;
+      height:2.8em;   /* tune 2.2–3.0em */
+      width:auto;
       display:block;
       opacity:.95;
       flex:0 0 auto;
+      margin-top:-.05em; /* small baseline alignment tweak */
     }
+
     .brandtext{
       display:flex;
       flex-direction:column;
@@ -129,42 +133,40 @@
       background:rgba(17,24,39,.04);
     }
 
-     /* ===== EN/TR ===== */
+    /* ===== EN/TR ===== */
     .lang{
-  display:inline-flex;
-  align-items:center;
-  border:1px solid var(--line);
-  background:rgba(255,255,255,.65);
-  border-radius:999px;
-  padding:4px;
-  gap:4px;
-  white-space:nowrap;
-}
+      display:inline-flex;
+      align-items:center;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.65);
+      border-radius:999px;
+      padding:4px;
+      gap:4px;
+      white-space:nowrap;
+    }
+    .langbtn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-width:40px;
+      height:32px;
+      padding:0 10px;
+      border-radius:999px;
+      font-size:12px;
+      font-weight:700;
+      letter-spacing:.10em;
+      color:var(--muted);
+    }
+    .langbtn:hover{
+      background:rgba(17,24,39,.04);
+      color:var(--fg);
+    }
+    .langbtn.is-active{
+      background:rgba(43,108,176,.12);
+      border:1px solid rgba(43,108,176,.30);
+      color:var(--fg);
+    }
 
-.langbtn{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  min-width:40px;
-  height:32px;
-  padding:0 10px;
-  border-radius:999px;
-  font-size:12px;
-  font-weight:700;
-  letter-spacing:.10em;
-  color:var(--muted);
-}
-
-.langbtn:hover{
-  background:rgba(17,24,39,.04);
-  color:var(--fg);
-}
-
-.langbtn.is-active{
-  background:rgba(43,108,176,.12);
-  border:1px solid rgba(43,108,176,.30);
-  color:var(--fg);
-}
     /* ===== Sections ===== */
     main{padding-bottom:44px}
     section{
@@ -198,7 +200,7 @@
       border-radius:999px;
     }
 
-    /* Hero brand line + tagline below */
+    /* Hero brand */
     .hero-brand{
       display:flex;
       align-items:flex-start;
@@ -234,7 +236,7 @@
       font-size:44px;
       line-height:1.02;
       letter-spacing:-.02em;
-      font-weight:400; /* not bold */
+      font-weight:400;
       color:var(--fg);
       opacity:.95;
     }
@@ -389,7 +391,7 @@
       :root{--headerH:78px;}
       .nav{gap:10px}
       .brand{min-width:auto}
-      .brandline .descriptor{display:none} /* keep header compact */
+      .brandline .descriptor{display:none}
       .navlinks{
         flex-wrap:nowrap;
         overflow:auto;
@@ -398,8 +400,11 @@
         padding-bottom:2px;
       }
       .navlinks a{white-space:nowrap}
-      .brand img{width:44px; height:44px}
-      .brandtag{display:none} /* optional: hide tagline in header on very small screens */
+
+      /* ✅ mobile logo uses em as well */
+      .brand img{height:2.3em; width:auto;}
+
+      .brandtag{display:none}
     }
   </style>
 </head>
@@ -411,25 +416,23 @@
         <a class="brand" href="#top" aria-label="ASIDUM Home">
           <img src="/Logo3.svg" alt="ASIDUM logo" draggable="false" />
           <div class="brandtext">
-            <!-- one line -->
             <div class="brandline">
-              
               <span class="descriptor">Modular Underwater Systems</span>
             </div>
-            
           </div>
         </a>
 
         <nav class="navlinks" aria-label="Primary">
           <a href="#what">What we build</a>
-          <a href="#approach">Engineering </a>
+          <a href="#approach">Engineering</a>
           <a href="#vision">Vision</a>
           <a href="#architecture">Architecture</a>
           <a href="#partner">Partnership</a>
         </nav>
+
         <div class="lang" aria-label="Language switch">
           <a class="langbtn is-active" href="/" hreflang="en" lang="en">EN</a>
-        <a class="langbtn" href="/tr/" hreflang="tr" lang="tr">TR</a>
+          <a class="langbtn" href="/tr/" hreflang="tr" lang="tr">TR</a>
         </div>
       </div>
     </div>
@@ -445,12 +448,9 @@
           <div class="hero-brand">
             <img src="/Logo3.svg" alt="ASIDUM" draggable="false" />
             <div class="hero-brandtext">
-              <!-- one line -->
               <div class="hero-brandline">
-                
                 <span class="descriptor">Modular Underwater Systems</span>
               </div>
-              
             </div>
           </div>
 
@@ -512,7 +512,7 @@
     <!-- ENGINEERING -->
     <section id="approach">
       <div class="wrap">
-        <div class="section-title">Engineering </div>
+        <div class="section-title">Engineering</div>
         <p class="section-lead">
           Underwater systems as integrated engineering products.
         </p>
@@ -625,10 +625,6 @@
                 <li>Example configuration options</li>
               </ul>
             </div>
-
-            <!-- Later:
-            <img src="/architecture.png" alt="ASIDUM system architecture" style="width:100%; border-radius:14px; border:1px solid var(--line); margin-top:12px;" />
-            -->
           </div>
         </div>
       </div>
