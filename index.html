@@ -353,9 +353,10 @@
     /* Logo.svg viewBox="0 0 210 297" — A4 portrait, symbol centred roughly 24-175 x 90-240 */
     .foot-logo{
       display:block;
-      height:36px;
+      /* keep same visual height as text line */
+      height:18px;
       width:auto;
-      opacity:.50;
+      opacity:.40;
       flex:0 0 auto;
     }
 
@@ -426,7 +427,7 @@
               <div class="hero-brandline">
                 <span class="descriptor">Modular Underwater Systems</span>
               </div>
-            </div>
+              </div>
           </div>
 
           <p class="sub">
@@ -619,10 +620,10 @@
 
           <div class="panel">
             <h3>Contact</h3>
-            <p><b>Email:</b> <a href="/cdn-cgi/l/email-protection#99f0f7fff6d9f8eaf0fdecf4b7faf6f4"><span class="__cf_email__" data-cfemail="adc4c3cbc2edccdec4c9d8c083cec2c0">[email&#160;protected]</span></a></p>
+            <p><b>Email:</b> <a href="mailto:info@asidum.com">info@asidum.com</a></p>
             <p><b>Location:</b> Türkiye / EU</p>
             <div class="divider"></div>
-            <a class="btn primary" href="/cdn-cgi/l/email-protection#41282f272e0120322825342c6f222e2c7e3234232b2422357c00120805140c647371a3c1d5647371112033352f243332292831647371647377647371082f372432352c242f35">Email ASIDUM</a>
+            <a class="btn primary" href="mailto:info@asidum.com?subject=ASIDUM%20—%20Partnership%20%26%20Investment">Email ASIDUM</a>
           </div>
         </div>
       </div>
@@ -638,4 +639,13 @@
           class="foot-logo"
           draggable="false"
         />
-     
+        <span>© <span id="y"></span> ASIDUM. All rights reserved.</span>
+      </footer>
+    </div>
+  </main>
+
+  <script>
+    document.getElementById("y").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
