@@ -40,7 +40,7 @@
     a{color:inherit}
     .wrap{max-width:var(--max); margin:0 auto; padding:0 20px}
 
-    /* ===== Header (fixed) ===== */
+    /* ===== Header ===== */
     header{
       position:fixed;
       top:0; left:0; right:0;
@@ -59,13 +59,13 @@
       gap:18px;
     }
 
-    /* Brand block */
     .brand{
       display:flex;
       align-items:center;
       gap:12px;
       text-decoration:none;
-      min-width:320px;
+      min-width:0;
+      flex-shrink:1;
     }
     .brand img{
       height:2.8em;
@@ -73,13 +73,11 @@
       display:block;
       opacity:.95;
       flex:0 0 auto;
-      margin-top:-.05em;
     }
     .brandtext{
       display:flex;
       flex-direction:column;
       line-height:1.1;
-      gap:6px;
       min-width:0;
     }
     .brandline{
@@ -119,7 +117,6 @@
       background:rgba(17,24,39,.04);
     }
 
-    /* ===== EN/TR ===== */
     .lang{
       display:inline-flex;
       align-items:center;
@@ -142,6 +139,7 @@
       font-weight:700;
       letter-spacing:.10em;
       color:var(--muted);
+      text-decoration:none;
     }
     .langbtn:hover{
       background:rgba(17,24,39,.04);
@@ -186,46 +184,39 @@
       border-radius:999px;
     }
 
-    /* ✅ HERO: make title go UNDER the logo block */
+    /* ── HERO BRAND: logo + title in one tight horizontal row ── */
     .hero-brand{
       display:flex;
-      flex-direction:column; /* key change */
-      align-items:flex-start;
-      gap:18px;
-      margin-top:18px;
+      flex-direction:row;
+      align-items:center;
+      gap:24px;
+      margin-top:22px;
+      flex-wrap:wrap;
     }
-
-    /* Logo +20% (example: 250 -> 300) */
+    /* Logo3.svg aspect ratio ≈ 567:151 (wide), drive by height */
     .hero-brand img{
-      width:300px;
-      height:300px;
+      height:clamp(60px, 9vw, 100px);
+      width:auto;
       display:block;
-      opacity:.95;
       flex:0 0 auto;
     }
-
     .hero-brandtext{
       display:flex;
       flex-direction:column;
-      gap:10px;
+      gap:4px;
       min-width:0;
     }
-
-    .hero-brandline{
-      display:flex;
-      align-items:flex-start;
-      gap:14px;
-      flex-wrap:wrap; /* allows wrapping if needed */
-    }
-
-    /* Title */
     .hero-brandline .descriptor{
-      font-size:64px;
-      line-height:1.02;
+      font-size:clamp(24px, 4vw, 50px);
+      line-height:1.05;
       letter-spacing:-.02em;
       font-weight:400;
       color:var(--fg);
-      opacity:.95;
+    }
+    .hero-tagline{
+      font-size:13px;
+      color:var(--muted);
+      letter-spacing:.03em;
     }
 
     .sub{
@@ -234,7 +225,6 @@
       color:var(--muted);
       font-size:18px;
     }
-
     .cta{
       display:flex;
       gap:12px;
@@ -345,26 +335,36 @@
       gap:12px;
       margin-bottom:10px;
     }
-    .placeholder-title b{
-      font-weight:700;
-      color:var(--fg);
-      font-size:13px;
-    }
+    .placeholder-title b{font-weight:700; color:var(--fg); font-size:13px}
     .placeholder p{margin:0; color:var(--muted); font-size:13px}
     .placeholder ul{margin:10px 0 0; padding-left:18px; color:var(--muted); font-size:13px}
     .placeholder li{margin:6px 0}
 
+    /* ===== Footer ===== */
     .foot{
       padding:28px 0 48px;
       color:var(--muted);
       font-size:13px;
       border-top:1px solid var(--line);
+      display:flex;
+      align-items:center;
+      gap:9px;
+    }
+    /* Logo.svg viewBox="0 0 210 297" — A4 portrait, symbol centred roughly 24-175 x 90-240 */
+    .foot-logo{
+      display:block;
+      /* keep same visual height as text line */
+      height:18px;
+      width:auto;
+      opacity:.40;
+      flex:0 0 auto;
     }
 
-    /* ===== Mobile ===== */
-    @media (max-width: 980px){
-      .hero-brand img{width:180px; height:180px}
-      .hero-brandline .descriptor{font-size:44px}
+    /* ===== Responsive ===== */
+    @media (max-width: 620px){
+      .hero-brand{flex-direction:column; align-items:flex-start; gap:10px}
+      .hero-brand img{height:52px}
+      .hero-brandline .descriptor{font-size:26px}
     }
     @media (max-width: 720px){
       :root{--headerH:78px;}
@@ -420,12 +420,14 @@
         <div class="hero-card">
           <div class="kicker">Underwater robotics • Modular systems • Production-ready design</div>
 
+          <!-- Logo + "Modular Underwater Systems" — compact, side by side -->
           <div class="hero-brand">
             <img src="/Logo3.svg" alt="ASIDUM" draggable="false" />
             <div class="hero-brandtext">
               <div class="hero-brandline">
                 <span class="descriptor">Modular Underwater Systems</span>
               </div>
+              <div class="hero-tagline">Just explore. Simply.</div>
             </div>
           </div>
 
@@ -470,9 +472,7 @@
                 <b>High-level module map (v1)</b>
                 <span class="pill"><span class="dot"></span> Work in progress</span>
               </div>
-              <p>
-                System diagram that shows modules and interfaces without exposing sensitive details.
-              </p>
+              <p>System diagram that shows modules and interfaces without exposing sensitive details.</p>
               <ul>
                 <li>Propulsion / Power / Control / Payload layers</li>
                 <li>Interface boundaries and upgrade paths</li>
@@ -488,9 +488,7 @@
     <section id="approach">
       <div class="wrap">
         <div class="section-title">Engineering</div>
-        <p class="section-lead">
-          Underwater systems as integrated engineering products.
-        </p>
+        <p class="section-lead">Underwater systems as integrated engineering products.</p>
 
         <div class="grid cards">
           <div class="panel">
@@ -521,9 +519,7 @@
     <section id="vision">
       <div class="wrap">
         <div class="section-title">Product vision</div>
-        <p class="section-lead">
-          ASIDUM is focused on building production-ready modular ROV platforms.
-        </p>
+        <p class="section-lead">ASIDUM is focused on building production-ready modular ROV platforms.</p>
 
         <div class="grid two">
           <div class="panel">
@@ -581,19 +577,14 @@
 
           <div class="panel">
             <h3>Diagram / render</h3>
-            <p>
-              Visual will go here: a block diagram, exploded-view logic, or a clean concept render.
-            </p>
+            <p>Visual will go here: a block diagram, exploded-view logic, or a clean concept render.</p>
             <div class="divider"></div>
-
             <div class="placeholder">
               <div class="placeholder-title">
                 <b>System diagram placeholder</b>
                 <span class="pill"><span class="dot"></span> In development</span>
               </div>
-              <p>
-                The final graphic shows module boundaries and interfaces. This section is being refined.
-              </p>
+              <p>The final graphic shows module boundaries and interfaces. This section is being refined.</p>
               <ul>
                 <li>High-level blocks (no internal details)</li>
                 <li>Standardized interfaces highlighted</li>
@@ -641,7 +632,15 @@
 
     <div class="wrap">
       <footer class="foot">
-        <div>© <span id="y"></span> ASIDUM. All rights reserved.</div>
+        <!-- Logo.svg — the ASIDUM "@"-style symbol, small and muted -->
+        <img
+          src="/Logo.svg"
+          alt=""
+          aria-hidden="true"
+          class="foot-logo"
+          draggable="false"
+        />
+        <span>© <span id="y"></span> ASIDUM. All rights reserved.</span>
       </footer>
     </div>
   </main>
