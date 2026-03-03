@@ -4,8 +4,8 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <title>ASIDUM — Modüler Sualtı Sistemleri</title>
-  <meta name="description" content="Just explore. Simply. ASIDUM, gerçek saha koşullarına uygun modüler ROV platformları tasarlar: sualtı araştırma, inceleme ve ölçeklenebilir üretim." />
+  <title>Modüler Sualtı Sistemleri</title>
+  <meta name="description" content="Just explore. Simply. ASIDUM; gerçek saha sualtı araştırmaları, inspeksiyon ve ölçeklenebilir üretim için modüler ROV platformları geliştirir." />
 
   <link rel="icon" href="/favicon.ico" sizes="any" />
   <link rel="icon" type="image/svg+xml" href="/Logo1.svg" />
@@ -23,7 +23,7 @@
 
       --max:1120px;
       --radius:18px;
-      --headerH:84px; /* a bit taller to fit tagline in header */
+      --headerH:84px;
     }
 
     *{box-sizing:border-box}
@@ -40,7 +40,7 @@
     a{color:inherit}
     .wrap{max-width:var(--max); margin:0 auto; padding:0 20px}
 
-    /* ===== Header (fixed) ===== */
+    /* ===== Header ===== */
     header{
       position:fixed;
       top:0; left:0; right:0;
@@ -59,17 +59,17 @@
       gap:18px;
     }
 
-    /* Brand block: two lines (line1 brand, line2 tagline) */
     .brand{
       display:flex;
       align-items:center;
       gap:12px;
       text-decoration:none;
-      min-width:320px;
+      min-width:0;
+      flex-shrink:1;
     }
     .brand img{
-      width:52px;
-      height:52px;
+      height:2.8em;
+      width:auto;
       display:block;
       opacity:.95;
       flex:0 0 auto;
@@ -78,7 +78,6 @@
       display:flex;
       flex-direction:column;
       line-height:1.1;
-      gap:6px;
       min-width:0;
     }
     .brandline{
@@ -88,11 +87,6 @@
       white-space:nowrap;
       min-width:0;
     }
-    .brandline .brandword{
-      font-size:15px;
-      letter-spacing:.10em;
-      font-weight:800;
-    }
     .brandline .descriptor{
       font-size:12px;
       letter-spacing:.04em;
@@ -100,12 +94,6 @@
       color:var(--muted);
       overflow:hidden;
       text-overflow:ellipsis;
-    }
-    .brandtag{
-      font-size:12px;
-      color:var(--muted);
-      letter-spacing:.02em;
-      white-space:nowrap;
     }
 
     .navlinks{
@@ -129,7 +117,6 @@
       background:rgba(17,24,39,.04);
     }
 
-    /* ===== EN/TR ===== */
     .lang{
       display:inline-flex;
       align-items:center;
@@ -152,6 +139,7 @@
       font-weight:700;
       letter-spacing:.10em;
       color:var(--muted);
+      text-decoration:none;
     }
     .langbtn:hover{
       background:rgba(17,24,39,.04);
@@ -196,60 +184,46 @@
       border-radius:999px;
     }
 
-    /* Hero brand line + tagline below */
+    /* ── HERO BRAND: logo + title in one tight horizontal row ── */
     .hero-brand{
       display:flex;
-      align-items:flex-start;
-      gap:18px;
-      margin-top:18px;
+      flex-direction:row;
+      align-items:center;
+      gap:24px;
+      margin-top:22px;
+      flex-wrap:wrap;
     }
     .hero-brand img{
-      width:120px;
-      height:120px;
+      height:clamp(60px, 9vw, 100px);
+      width:auto;
       display:block;
-      opacity:.95;
       flex:0 0 auto;
     }
     .hero-brandtext{
       display:flex;
       flex-direction:column;
-      gap:10px;
+      gap:4px;
       min-width:0;
     }
-    .hero-brandline{
-      display:flex;
-      gap:14px;
-      align-items:baseline;
-      flex-wrap:wrap;
-    }
-    .hero-brandline .brandword{
-      font-size:56px;
-      line-height:1.02;
-      letter-spacing:-.02em;
-      font-weight:900;
-    }
     .hero-brandline .descriptor{
-      font-size:44px;
-      line-height:1.02;
+      font-size:clamp(24px, 4vw, 50px);
+      line-height:1.05;
       letter-spacing:-.02em;
-      font-weight:400; /* not bold */
+      font-weight:400;
       color:var(--fg);
-      opacity:.95;
     }
-    .hero-tag{
-      font-size:14px;
+    .hero-tagline{
+      font-size:13px;
       color:var(--muted);
-      letter-spacing:.02em;
-      margin-top:-2px;
+      letter-spacing:.03em;
     }
 
     .sub{
-      margin:12px 0 0;
+      margin:18px 0 0;
       max-width:920px;
       color:var(--muted);
       font-size:18px;
     }
-
     .cta{
       display:flex;
       gap:12px;
@@ -360,34 +334,40 @@
       gap:12px;
       margin-bottom:10px;
     }
-    .placeholder-title b{
-      font-weight:700;
-      color:var(--fg);
-      font-size:13px;
-    }
+    .placeholder-title b{font-weight:700; color:var(--fg); font-size:13px}
     .placeholder p{margin:0; color:var(--muted); font-size:13px}
     .placeholder ul{margin:10px 0 0; padding-left:18px; color:var(--muted); font-size:13px}
     .placeholder li{margin:6px 0}
 
+    /* ===== Footer ===== */
     .foot{
       padding:28px 0 48px;
       color:var(--muted);
       font-size:13px;
       border-top:1px solid var(--line);
+      display:flex;
+      align-items:center;
+      gap:9px;
+    }
+    .foot-logo{
+      display:block;
+      height:40px;
+      width:auto;
+      opacity:.40;
+      flex:0 0 auto;
     }
 
-    /* ===== Mobile ===== */
-    @media (max-width: 980px){
-      .hero-brand{flex-wrap:wrap}
-      .hero-brand img{width:90px; height:90px}
-      .hero-brandline .brandword{font-size:44px}
-      .hero-brandline .descriptor{font-size:34px}
+    /* ===== Responsive ===== */
+    @media (max-width: 620px){
+      .hero-brand{flex-direction:column; align-items:flex-start; gap:10px}
+      .hero-brand img{height:52px}
+      .hero-brandline .descriptor{font-size:26px}
     }
     @media (max-width: 720px){
       :root{--headerH:78px;}
       .nav{gap:10px}
       .brand{min-width:auto}
-      .brandline .descriptor{display:none} /* keep header compact */
+      .brandline .descriptor{display:none}
       .navlinks{
         flex-wrap:nowrap;
         overflow:auto;
@@ -396,8 +376,7 @@
         padding-bottom:2px;
       }
       .navlinks a{white-space:nowrap}
-      .brand img{width:44px; height:44px}
-      .brandtag{display:none} /* optional: hide tagline in header on very small screens */
+      .brand img{height:2.3em; width:auto;}
     }
   </style>
 </head>
@@ -406,26 +385,24 @@
   <header>
     <div class="wrap">
       <div class="nav">
-        <a class="brand" href="#top" aria-label="ASIDUM Home">
-          <img src="/Logo1.svg" alt="ASIDUM logo" draggable="false" />
+        <a class="brand" href="#top" aria-label="ASIDUM Ana Sayfa">
+          <img src="/Logo3.svg" alt="ASIDUM logosu" draggable="false" />
           <div class="brandtext">
             <div class="brandline">
-              <span class="brandword">ASIDUM</span>
               <span class="descriptor">Modüler Sualtı Sistemleri</span>
             </div>
-            <div class="brandtag">Just explore. Simply.</div>
           </div>
         </a>
 
-        <nav class="navlinks" aria-label="Primary">
+        <nav class="navlinks" aria-label="Birincil">
           <a href="#what">Ne üretiyoruz</a>
-          <a href="#approach">Mühendislik yaklaşımı</a>
+          <a href="#approach">Mühendislik</a>
           <a href="#vision">Vizyon</a>
           <a href="#architecture">Mimari</a>
           <a href="#partner">Ortaklık</a>
         </nav>
 
-        <div class="lang" aria-label="Language switch">
+        <div class="lang" aria-label="Dil seçimi">
           <a class="langbtn" href="/" hreflang="en" lang="en">EN</a>
           <a class="langbtn is-active" href="/tr/" hreflang="tr" lang="tr">TR</a>
         </div>
@@ -434,24 +411,22 @@
   </header>
 
   <main id="top">
+    <!-- HERO -->
     <div class="wrap">
       <section class="hero">
         <div class="hero-card">
-          <div class="kicker">Sualtı robotik • Modüler sistemler • Üretime hazır tasarım</div>
 
           <div class="hero-brand">
-            <img src="/Logo1.svg" alt="ASIDUM" draggable="false" />
+            <img src="/Logo3.svg" alt="ASIDUM" draggable="false" />
             <div class="hero-brandtext">
               <div class="hero-brandline">
-                <span class="brandword">ASIDUM</span>
                 <span class="descriptor">Modüler Sualtı Sistemleri</span>
               </div>
-              <div class="hero-tag">Just explore. Simply.</div>
             </div>
           </div>
 
           <p class="sub">
-            Gerçek saha koşulları için tasarlanmış modüler ROV platformları geliştiriyoruz: sualtı araştırma, inceleme ve ölçeklenebilir üretim.
+            Gerçek saha sualtı araştırmaları, inspeksiyon ve ölçeklenebilir üretim için tasarlanmış modüler ROV platformları.
           </p>
 
           <div class="cta">
@@ -462,40 +437,39 @@
       </section>
     </div>
 
+    <!-- WHAT WE BUILD -->
     <section id="what">
       <div class="wrap">
         <div class="section-title">Ne üretiyoruz</div>
         <div class="grid two">
           <div>
             <p class="section-lead">
-              <b>Modüler sualtı ROV platformları</b>, tekil cihazlar yerine bütün bir sistem olarak tasarlanır.
+              <b>Modüler sualtı ROV platformları</b>, tekil cihazlar yerine bütünleşik sistemler olarak tasarlanır.
             </p>
             <div class="panel">
-              <h3>Odak noktamız</h3>
+              <h3>Odak alanımız</h3>
               <ul class="clean">
-                <li><b>Modüler ROV mimarileri</b> — İtki, güç ve payload modülleri değiştirilebilir; hızlı konfigürasyon sağlar.</li>
-                <li><b>Ölçeklenebilir kontrol sistemleri</b> — Kompakt araştırma platformlarından daha büyük inceleme konfigürasyonlarına.</li>
-                <li><b>Üretime hazır tasarım</b> — Tekrarlanabilirlik, montaj ve pilot-seri üretim için mühendislik.</li>
-                <li><b>Güvenilirlik odaklı mühendislik</b> — Mekanik sadelik, kontrollü arayüzler, öngörülebilir davranış.</li>
-                <li><b>Uygulama esnekliği</b> — Araştırma, inceleme, prototipleme ve özel sualtı uygulamaları.</li>
+                <li><b>Modüler ROV mimarileri</b> — Hızlı konfigürasyon değişimi için değiştirilebilir itki, güç ve faydalı yük modülleri.</li>
+                <li><b>Ölçeklenebilir kontrol sistemleri</b> — Kompakt araştırma platformlarından daha büyük inspeksiyon odaklı konfigürasyonlara.</li>
+                <li><b>Üretime hazır tasarım</b> — Tekrarlanabilirlik, montaj ve pilot-seri geçişi için mühendislik yaklaşımı.</li>
+                <li><b>Güvenilirlik odaklı mühendislik</b> — Mekanik sadelik, kontrollü arayüzler ve gerçek koşullarda öngörülebilir davranış.</li>
+                <li><b>Uygulama esnekliği</b> — Araştırma, inspeksiyon, prototipleme ve özel sualtı uygulamaları.</li>
               </ul>
             </div>
           </div>
 
           <div class="panel">
-            <h3>Mimari diyagram hazırlanıyor</h3>
+            <h3>Mimari diyagramı hazırlanıyor</h3>
             <div class="divider"></div>
             <div class="placeholder">
               <div class="placeholder-title">
                 <b>Üst seviye modül haritası (v1)</b>
-                <span class="pill"><span class="dot"></span> Çalışma aşamasında</span>
+                <span class="pill"><span class="dot"></span> Çalışma sürümü</span>
               </div>
-              <p>
-                Hassas detayları açığa çıkarmadan modülleri ve arayüzleri gösteren sistem diyagramı hazırlanıyor.
-              </p>
+              <p>Hassas detayları açığa çıkarmadan modülleri ve arayüzleri gösteren sistem diyagramı.</p>
               <ul>
-                <li>İtki / Güç / Kontrol / Payload katmanları</li>
-                <li>Arayüz sınırları ve yükseltme yolları</li>
+                <li>İtki / Güç / Kontrol / Faydalı yük katmanları</li>
+                <li>Arayüz sınırları ve geliştirme yolları</li>
                 <li>Örnek konfigürasyon seçenekleri</li>
               </ul>
             </div>
@@ -504,88 +478,87 @@
       </div>
     </section>
 
+    <!-- ENGINEERING -->
     <section id="approach">
       <div class="wrap">
-        <div class="section-title">Mühendislik yaklaşımı</div>
-        <p class="section-lead">
-          Sualtı sistemleri; <b>entegre mühendislik ürünleri</b> olarak ele alınır, deneysel montajlar olarak değil.
-        </p>
+        <div class="section-title">Mühendislik</div>
+        <p class="section-lead">Sualtı sistemlerini bütünleşik mühendislik ürünleri olarak ele alıyoruz.</p>
 
         <div class="grid cards">
           <div class="panel">
             <h3>Önce sistem mimarisi</h3>
-            <p>Mekanik, elektrik ve yazılım kararları tek bir sistem modeli içinde alınır.</p>
+            <p>Mekanik, elektrik ve yazılım kararları izolasyon halinde değil, tek bir sistem modeli içinde alınır.</p>
           </div>
           <div class="panel">
             <h3>İlk günden üretilebilirlik</h3>
-            <p>Geometri, toleranslar, malzemeler ve arayüzler gerçek üretim süreçleri için seçilir.</p>
+            <p>Geometri, toleranslar, malzemeler ve arayüzler gerçek üretim süreçleri dikkate alınarak seçilir.</p>
           </div>
           <div class="panel">
             <h3>Kontrollü modülerlik</h3>
-            <p>Modüller net arayüzlerle tanımlanır. Modülerlik karmaşıklığı artırmamalıdır.</p>
+            <p>Modüller net arayüzlerle tanımlanır. Modülerlik, karmaşıklığı azaltmalı; artırmamalıdır.</p>
           </div>
           <div class="panel">
-            <h3>Özellik yoğunluğu yerine güvenilirlik</h3>
-            <p>Daha az mekanizma, daha az arıza modu; uzun çalışma döngülerinde öngörülebilir davranış.</p>
+            <h3>Özellik yoğunluğu değil güvenilirlik</h3>
+            <p>Daha az mekanizma, daha az arıza modu; basınç altında ve uzun çevrimlerde öngörülebilir davranış.</p>
           </div>
           <div class="panel">
             <h3>Optimizasyondan önce mühendislik</h3>
-            <p>Kararlı mimari; performans ayarı, maliyet düşürme ve ölçeklemeden önce gelir.</p>
+            <p>Performans ayarı, maliyet düşürme ve ölçekleme öncesinde stabil bir mimari gerekir.</p>
           </div>
         </div>
       </div>
     </section>
 
+    <!-- PRODUCT VISION / ROADMAP -->
     <section id="vision">
       <div class="wrap">
-        <div class="section-title">Vizyon</div>
-        <p class="section-lead">
-          ASIDUM, tek seferlik deneysel sistemler değil, <b>üretime hazır modüler ROV platformları</b> geliştirmeye odaklanır.
-        </p>
+        <div class="section-title">Ürün vizyonu</div>
+        <p class="section-lead">ASIDUM, üretime hazır modüler ROV platformları geliştirmeye odaklanır.</p>
 
         <div class="grid two">
           <div class="panel">
             <h3>Yol haritası</h3>
             <ul class="clean">
-              <li><b>Konsept &amp; Mimari</b> — Sistem seviyesi mimari; modüler arayüzler; hedef çalışma zarfı.</li>
-              <li><b>Prototip &amp; Doğrulama</b> — Fonksiyonel prototipler; çevresel doğrulama; saha geri bildirimi ile iterasyon.</li>
-              <li><b>Pilot Platformlar</b> — Entegre pilot; montaj ve servis edilebilirlik doğrulaması; sınırlı seri hazırlığı.</li>
-              <li><b>Ölçeklenebilir Üretim</b> — Çekirdek modüllerde tasarım dondurma; tedarikçi/süreç hizalaması; tekrarlanabilir üretim.</li>
+              <li><b>Konsept &amp; Mimari</b> — Sistem mimarisi; modüler arayüzler; hedef çalışma zarfı.</li>
+              <li><b>Prototip &amp; Doğrulama</b> — Fonksiyonel prototipler; çevresel doğrulama; saha geri bildirimiyle iterasyon.</li>
+              <li><b>Pilot Platformlar</b> — Entegre pilot platformlar; montaj ve servis edilebilirlik doğrulaması; sınırlı seri hazırlığı.</li>
+              <li><b>Ölçeklenebilir Üretim</b> — Çekirdek modüllerde tasarım dondurma; tedarikçi/süreç uyumu; tekrarlanabilir üretim.</li>
             </ul>
           </div>
 
           <div class="callout">
-            <b>Ne sağlar</b>
+            <b>Ne sağlar?</b>
             <div class="divider"></div>
             <ul class="clean">
-              <li>Fikirden ürüne net yol</li>
+              <li>Fikirden ürüne net bir geçiş</li>
               <li>Aşamalı doğrulama ile risk azaltma</li>
               <li>Farklı pazar segmentleri için esneklik</li>
               <li>Ortaklar ve yatırımcılar için şeffaflık</li>
             </ul>
             <div class="divider"></div>
-            <span class="mono">Hızlanmadan önce mühendislik olgunluğunu önceleriz.</span>
+            <span class="mono">Hızlanmadan önce mühendislik olgunluğunu önceliklendiriyoruz.</span>
           </div>
         </div>
       </div>
     </section>
 
+    <!-- VISUAL CONCEPT & ARCHITECTURE -->
     <section id="architecture">
       <div class="wrap">
-        <div class="section-title">Mimari</div>
+        <div class="section-title">Görsel konsept &amp; mimari</div>
         <p class="section-lead">
-          Platformlar; kontrollü arayüzler ve öngörülebilir davranış ile <b>net bir modüler sistem mimarisi</b> etrafında tasarlanır.
+          Platformlar, <b>net bir modüler sistem mimarisi</b> etrafında; kontrollü arayüzler ve öngörülebilir davranışla tasarlanır.
         </p>
 
         <div class="grid two">
           <div class="panel">
-            <h3>Çekirdek katmanlar</h3>
+            <h3>Çekirdek sistem katmanları</h3>
             <ul class="clean">
-              <li><b>İtki katmanı</b> — Standart mekanik ve elektrik arayüzlerine sahip modüler itki birimleri.</li>
-              <li><b>Güç &amp; dağıtım</b> — Ölçeklenebilir batarya veya tether tabanlı konfigürasyonlar için merkezi güç yönetimi.</li>
-              <li><b>Kontrol &amp; iletişim</b> — Sensörler, navigasyon ve payload kontrolü için birleşik kontrol mimarisi.</li>
-              <li><b>Yapısal çerçeve</b> — Modüller için taşıyıcı olarak tasarlanmış yük taşıyan iskelet.</li>
-              <li><b>Payload &amp; görev modülleri</b> — Çekirdek sistemden izole görev odaklı bileşenler.</li>
+              <li><b>İtki katmanı</b> — Standart mekanik/elektrik arayüzlü modüler itki üniteleri.</li>
+              <li><b>Güç &amp; dağıtım</b> — Ölçeklenebilir batarya veya tether tabanlı konfigürasyonlarla merkezi güç yönetimi.</li>
+              <li><b>Kontrol &amp; haberleşme</b> — Sensörler, navigasyon ve faydalı yük kontrolü için birleşik kontrol mimarisi.</li>
+              <li><b>Yapısal iskelet</b> — Modüller için taşıyıcı olarak tasarlanmış yük taşıyan çerçeve.</li>
+              <li><b>Faydalı yük &amp; görev modülleri</b> — Çekirdek sistemden izole görev odaklı bileşenler.</li>
             </ul>
             <div class="divider"></div>
             <h3 style="margin-top:0;">Tasarım mantığı</h3>
@@ -597,23 +570,18 @@
           </div>
 
           <div class="panel">
-            <h3>Diyagram / render</h3>
-            <p>
-              Burada bir görsel olacak: blok diyagram, exploded-view mantığı veya temiz bir konsept render. Etiketler minimal tutulur.
-            </p>
+            <h3>Diyagram / görsel</h3>
+            <p>Buraya bir blok diyagram, parçalı görünüm mantığı veya temiz bir konsept render eklenecek.</p>
             <div class="divider"></div>
-
             <div class="placeholder">
               <div class="placeholder-title">
                 <b>Sistem diyagramı yer tutucu</b>
                 <span class="pill"><span class="dot"></span> Geliştiriliyor</span>
               </div>
-              <p>
-                Nihai grafik; modül sınırlarını ve arayüzleri gösterecek. Bu bölüm üzerinde çalışılıyor.
-              </p>
+              <p>Nihai grafik; modül sınırlarını ve arayüzleri gösterir. Bu bölüm iyileştirilmektedir.</p>
               <ul>
                 <li>Üst seviye bloklar (iç detay yok)</li>
-                <li>Standart arayüzler vurgulanacak</li>
+                <li>Standart arayüzlerin vurgulanması</li>
                 <li>Örnek konfigürasyon seçenekleri</li>
               </ul>
             </div>
@@ -622,24 +590,26 @@
       </div>
     </section>
 
+    <!-- PARTNERSHIP & INVESTMENT -->
     <section id="partner">
       <div class="wrap">
         <div class="section-title">Ortaklık &amp; yatırım</div>
         <p class="section-lead">
-          ASIDUM; yol haritamızla uyumlu stratejik ortaklıklar, pilot projeler ve erken aşama yatırım görüşmelerine açıktır.
+          ASIDUM; mühendislik ve ürün yol haritasıyla uyumlu stratejik ortaklıklara, pilot projelere ve erken aşama yatırım görüşmelerine açıktır.
         </p>
 
         <div class="grid two">
           <div class="panel">
             <h3>İş birliği alanları</h3>
             <ul class="clean">
-              <li>Sualtı araştırma ve inceleme platformları</li>
+              <li>Sualtı araştırma ve inspeksiyon platformları</li>
               <li>Üretim, bileşenler ve sistem entegrasyonu</li>
-              <li>Pilot sahalar ve erken müşteri doğrulaması</li>
+              <li>Pilot saha uygulamaları ve erken müşteri doğrulaması</li>
             </ul>
             <div class="divider"></div>
             <p class="mono">
-              Teknik iş birliği, endüstriyel ortaklık veya yatırım fırsatları için odaklı bir görüşmeye açığız.
+              Teknik iş birliği, endüstriyel ortaklık veya yatırım fırsatlarını değerlendiriyorsanız,
+              odaklı bir görüşmeye açığız.
             </p>
           </div>
 
@@ -648,7 +618,7 @@
             <p><b>E-posta:</b> <a href="mailto:info@asidum.com">info@asidum.com</a></p>
             <p><b>Konum:</b> Türkiye / AB</p>
             <div class="divider"></div>
-            <a class="btn primary" href="mailto:info@asidum.com?subject=ASIDUM%20—%20Ortaklık%20%26%20Yatırım">ASIDUM'a e-posta</a>
+            <a class="btn primary" href="mailto:info@asidum.com?subject=ASIDUM%20—%20Partnership%20%26%20Investment">ASIDUM’a e-posta</a>
           </div>
         </div>
       </div>
@@ -656,7 +626,8 @@
 
     <div class="wrap">
       <footer class="foot">
-        <div>© <span id="y"></span> ASIDUM. Tüm hakları saklıdır.</div>
+        <img src="/Logo1.svg" alt="" aria-hidden="true" class="foot-logo" draggable="false" />
+        <span>© <span id="y"></span> ASIDUM. All rights reserved.</span>
       </footer>
     </div>
   </main>
